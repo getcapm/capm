@@ -1,0 +1,3 @@
+image: getcodelimit/codelimit:latest
+command: scan /capm/workspace
+workspace_mode: rw

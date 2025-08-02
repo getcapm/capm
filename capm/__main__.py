@@ -1,31 +1,55 @@
-import importlib
 import os
 import sys
+from os import path
+from pathlib import Path
 
 import yaml
+
+from capm.entities.Package import Package
+from capm.entities.PackageConfig import PackageConfig
+from capm.utils import run_package
 
 CONFIG_FILE = '.capm.yml'
 
 
-def load_config() -> list[str]:
+def load_config() -> list[PackageConfig]:
     with open(CONFIG_FILE, 'r') as file:
         config_data = file.read()
     entries = yaml.safe_load(config_data)
     if not isinstance(entries, list):
         raise ValueError(f"Expected a list in {CONFIG_FILE}, got {type(entries)}")
-    return [e['id'] for e in entries if 'id' in e]
+    return [PackageConfig(**e) for e in entries]
+
+
+def load_packages() -> dict[str, Package]:
+    result: dict[str, Package] = {}
+    packages_dir = Path(__file__).parent.joinpath('packages')
+    yml_files = [packages_dir.joinpath(f) for f in os.listdir(packages_dir) if
+                 packages_dir.joinpath(f).is_file() and f.endswith('.yml')]
+    for yml_file in yml_files:
+        with open(yml_file, 'r') as file:
+            d = yaml.safe_load(file)
+            package_id = path.splitext(path.basename(yml_file))[0]
+            result[package_id] = Package(**d)
+    print(f"Loaded {len(result)} package definitions")
+    return result
 
 
 def main():
     if not os.path.exists(CONFIG_FILE):
         print(f"{CONFIG_FILE} does not exist.")
         sys.exit(1)
-    packages = load_config()
-    for package in packages:
-        print(f"Package ID: {package}")
-        mod = importlib.import_module(f'packages.{package}')
-        mod.run()
-
+    packages = load_packages()
+    package_configs = load_config()
+    for package_config in package_configs:
+        print(f"Package ID: {package_config.id}")
+        package = packages[package_config.id]
+        exit_code = run_package(package.image, package.command, package.workspace_mode)
+        if exit_code != 0:
+            print(f"Error running package {package}, exit code: {exit_code}")
+            sys.exit(exit_code)
+        else:
+            print(f"Package {package} executed successfully.")
 
 
 if __name__ == "__main__":
