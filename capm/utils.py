@@ -1,21 +1,15 @@
-from pathlib import Path
+from rich.console import Console  # type: ignore
 
-import docker
-from docker.errors import ContainerError
-
-WORKSPACE_DIR = '/capm/workspace'
+console = Console()
 
 
-def run_package(image: str, command: str, workspace_mode: str = 'ro', path: Path = Path('.')) -> int:
-    client = docker.from_env()
-    print(f'Pulling image: {image}...')
-    client.images.pull(image)
-    print(f'Running image ({image}) container...')
-    command = command.format(workspace=WORKSPACE_DIR)
-    try:
-        client.containers.run(image, command,
-                              volumes={str(path.resolve()): {'bind': '/capm/workspace', 'mode': workspace_mode}})
-        return 0
-    except ContainerError as e:
-        print(e.container.logs().decode('utf-8'))
-        return e.exit_status
+def info(text: str):
+    console.print(f'[bold]ℹ︎[/bold] {text}', soft_wrap=True)
+
+
+def success(text: str):
+    console.print(f'[green]✔[/green] {text}', soft_wrap=True)
+
+
+def fail(text: str):
+    console.print(f'[red]⨯[/red] {text}', soft_wrap=True)

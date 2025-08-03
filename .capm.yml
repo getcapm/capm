@@ -1,3 +1,4 @@
-- id: codelimit
-- id: ruff
-- id: mypy
+packages:
+  - id: codelimit
+  - id: ruff
+  - id: mypy

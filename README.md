@@ -1,4 +1,4 @@
-# CAPM - Code Analysis Package Manager
+# CAPM
 
 <div align="center">
 

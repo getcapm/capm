@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "docker>=7.1.0",
+    "halo>=0.0.31",
+    "typer>=0.16.0",
 ]
 
 [project.scripts]
