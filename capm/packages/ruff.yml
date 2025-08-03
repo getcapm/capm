@@ -1,2 +1,2 @@
 image: ghcr.io/astral-sh/ruff:0.12.7
-command: check {workspace}
+args: check {workspace}

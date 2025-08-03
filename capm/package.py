@@ -7,6 +7,7 @@ from docker.errors import ContainerError
 from halo import Halo  # type: ignore
 
 from capm.entities.Package import Package
+from capm.entities.PackageConfig import PackageConfig
 
 WORKSPACE_DIR = '/capm/workspace'
 
@@ -25,21 +26,33 @@ def load_packages() -> dict[str, Package]:
     return result
 
 
-def run_package(id: str, package: Package, path: Path = Path('.')) -> int:
+def run_package(package: Package, package_config: PackageConfig, path: Path = Path('.')) -> int:
     client = docker.from_env()
     spinner = Halo(text='Loading', spinner='dots')
     spinner.start()
-    image = package.image
-    spinner.text = f'[{id}] Pulling image: {image}'
+    if package_config.image:
+        image = package_config.image
+    else:
+        image = package.image
+    spinner.text = f'[{package_config.id}] Pulling image: {image}'
     client.images.pull(image)
-    spinner.text = f'[{id}] Running image: ({image})'
-    command = package.command.format(workspace=WORKSPACE_DIR)
-    volumes = {str(path.resolve()): {'bind': '/capm/workspace', 'mode': package.workspace_mode}}
+    spinner.text = f'[{package_config.id}] Running image: ({image})'
+    if package_config.args:
+        args = package_config.args.format(workspace=WORKSPACE_DIR)
+    else:
+        args = package.args.format(workspace=WORKSPACE_DIR)
+    if package_config.extra_args:
+        args = package_config.extra_args + ' ' + args
+    if package_config.workspace_mode:
+        mode = package_config.workspace_mode
+    else:
+        mode = package.workspace_mode
+    volumes = {str(path.resolve()): {'bind': '/capm/workspace', 'mode': mode}}
     try:
-        client.containers.run(image, command, volumes=volumes)
-        spinner.succeed(f'[{id}] Package executed successfully')
+        client.containers.run(image, args, volumes=volumes)
+        spinner.succeed(f'[{package_config.id}] Package executed successfully')
         return 0
     except ContainerError as e:
-        spinner.fail(f"[{id}] Error running package, exit code: {e.exit_status}")
+        spinner.fail(f"[{package_config.id}] Error running package, exit code: {e.exit_status}")
         print(e.container.logs().decode('utf-8'))
         return e.exit_status

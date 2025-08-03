@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-mycapm = "capm.__main__:main"
+mycapm = "capm.__main__:cli"
 
 [dependency-groups]
 dev = [
