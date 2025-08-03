@@ -5,20 +5,11 @@ from pathlib import Path
 
 import yaml
 
+from capm.config import load_config_from_file
 from capm.entities.Package import Package
-from capm.entities.PackageConfig import PackageConfig
 from capm.utils import run_package
 
-CONFIG_FILE = '.capm.yml'
-
-
-def load_config() -> list[PackageConfig]:
-    with open(CONFIG_FILE, 'r') as file:
-        config_data = file.read()
-    entries = yaml.safe_load(config_data)
-    if not isinstance(entries, list):
-        raise ValueError(f"Expected a list in {CONFIG_FILE}, got {type(entries)}")
-    return [PackageConfig(**e) for e in entries]
+CONFIG_FILE = Path('.capm.yml')
 
 
 def load_packages() -> dict[str, Package]:
@@ -40,7 +31,7 @@ def main():
         print(f"{CONFIG_FILE} does not exist.")
         sys.exit(1)
     packages = load_packages()
-    package_configs = load_config()
+    package_configs = load_config_from_file(CONFIG_FILE)
     for package_config in package_configs:
         print(f"Package ID: {package_config.id}")
         package = packages[package_config.id]
@@ -49,7 +40,7 @@ def main():
             print(f"Error running package {package}, exit code: {exit_code}")
             sys.exit(exit_code)
         else:
-            print(f"Package {package} executed successfully.")
+            print(f"Package {package_config.id} executed successfully.")
 
 
 if __name__ == "__main__":

@@ -1,2 +1,2 @@
 image: getcapm/mypy:latest
-command: --install-types --non-interactive /capm/workspace
+command: --install-types --non-interactive {workspace}

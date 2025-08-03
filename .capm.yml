@@ -1,3 +1,3 @@
-# - id: codelimit
-# - id: ruff
+- id: codelimit
+- id: ruff
 - id: mypy
