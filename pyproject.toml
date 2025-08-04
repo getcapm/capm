@@ -5,6 +5,7 @@ description = "Code Analysis Package Manager"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "click<8.2.0",
     "docker>=7.1.0",
     "halo>=0.0.31",
     "pydantic-settings>=2.10.1",
