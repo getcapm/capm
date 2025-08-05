@@ -11,3 +11,9 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
+
+      - name: Install capm
+        run: pipx install capm
+
+      - name: Run capm
+        run: capm run
