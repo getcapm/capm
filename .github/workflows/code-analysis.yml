@@ -1,0 +1,13 @@
+name: code-analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
