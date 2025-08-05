@@ -29,6 +29,7 @@ dependencies = [
     { name = "docker" },
     { name = "halo" },
     { name = "pydantic-settings" },
+    { name = "pyyaml" },
     { name = "typer" },
 ]
 
@@ -46,6 +47,7 @@ requires-dist = [
     { name = "docker", specifier = ">=7.1.0" },
     { name = "halo", specifier = ">=0.0.31" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "typer", specifier = ">=0.16.0" },
 ]
 

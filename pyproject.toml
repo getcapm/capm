@@ -11,6 +11,7 @@ dependencies = [
     "docker>=7.1.0",
     "halo>=0.0.31",
     "pydantic-settings>=2.10.1",
+    "pyyaml>=6.0.2",
     "typer>=0.16.0",
 ]
 
@@ -20,7 +21,7 @@ Documentation = "https://getcapm.github.io"
 Source = "https://github.com/getcapm/capm"
 
 [project.scripts]
-mycapm = "capm.__main__:cli"
+capm = "capm.__main__:cli"
 
 [dependency-groups]
 dev = [
