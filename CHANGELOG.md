@@ -1,9 +1,23 @@
 # CHANGELOG
 
 
+## v0.2.2 (2025-08-05)
+
+### Bug Fixes
+
+- 🐛 Fix release workflow
+  ([`6ed513d`](https://github.com/getcapm/capm/commit/6ed513da0b5d78c891b50a016872dcce83b457d6))
+
+- 🐛 Update lock file
+  ([`2c5d2ef`](https://github.com/getcapm/capm/commit/2c5d2ef777b4547c932ea3d43be76d4f3d491bd7))
+
+
 ## v0.2.1 (2025-08-05)
 
 ### Bug Fixes
+
+- 🐛 Fix release workflow
+  ([`c05310f`](https://github.com/getcapm/capm/commit/c05310f8bde6f660bb5f0413b66ae937c00a6062))
 
 - 🐛 Fix release workflow
   ([`a65d688`](https://github.com/getcapm/capm/commit/a65d688b6952a17441818fab459ba90e7fb5db8e))
