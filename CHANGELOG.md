@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.4 (2025-08-05)
+
+### Bug Fixes
+
+- 🐛 Fix release workflow
+  ([`86a77d5`](https://github.com/getcapm/capm/commit/86a77d57b7bab7561b850aa9950a1797f29fa11b))
+
+
 ## v0.2.3 (2025-08-05)
 
 ### Bug Fixes
