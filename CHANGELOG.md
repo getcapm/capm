@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.5 (2025-08-05)
+
+### Bug Fixes
+
+- 🐛 Add pyyaml dependency
+  ([`9c39313`](https://github.com/getcapm/capm/commit/9c393136a981243a95b16c88f4c0447572fc7bba))
+
+
 ## v0.2.4 (2025-08-05)
 
 ### Bug Fixes
