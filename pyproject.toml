@@ -2,7 +2,9 @@
 name = "capm"
 version = "0.1.0"
 description = "Code Analysis Package Manager"
+authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
+license = "GPL-3.0-or-later"
 requires-python = ">=3.12"
 dependencies = [
     "click<8.2.0",
@@ -12,6 +14,11 @@ dependencies = [
     "typer>=0.16.0",
 ]
 
+[project.urls]
+Changelog = "https://github.com/getcapm/capm/blob/master/CHANGELOG.md"
+Documentation = "https://getcapm.github.io"
+Source = "https://github.com/getcapm/capm"
+
 [project.scripts]
 mycapm = "capm.__main__:cli"
 
@@ -20,6 +27,7 @@ dev = [
     "poethepoet>=0.36.0",
     "pyinstaller>=6.14.2",
     "pytest>=8.4.1",
+    "python-semantic-release>=9.21.0",
 ]
 
 [build-system]
@@ -29,3 +37,10 @@ build-backend = "hatchling.build"
 [tool.poe.tasks.bundle]
 help = "Create a binary executable using pyinstaller"
 cmd = "pyinstaller --workpath .build --clean --noconfirm --add-data ../capm/packages:packages --specpath dist -n capm capm/__main__.py"
+
+[tool.semantic_release]
+branch = "main"
+version_toml = [ "pyproject.toml:project.version" ]
+version_variables = [ "capm/version.py:version" ]
+upload_to_repository = false
+upload_to_release = false
