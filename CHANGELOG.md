@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.0 (2025-08-05)
+
+### Features
+
+- ✨ Code analysis workflow
+  ([`8cdf171`](https://github.com/getcapm/capm/commit/8cdf171e4188321d26bc14c9f70d8a8cc47aae56))
+
+
 ## v0.1.0 (2025-08-05)
 
 ### Bug Fixes
