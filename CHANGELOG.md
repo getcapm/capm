@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.2.3 (2025-08-05)
+
+### Bug Fixes
+
+- 🐛 Fix workflow
+  ([`676c989`](https://github.com/getcapm/capm/commit/676c9895a64f2dad549d7e07f24d087d0b5e1916))
+
+- 🐛 Update lock file
+  ([`15cb0c8`](https://github.com/getcapm/capm/commit/15cb0c8b6ea0d8e591d51ba05cb29d2f4d630107))
+
+
 ## v0.2.2 (2025-08-05)
 
 ### Bug Fixes
