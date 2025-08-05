@@ -7,7 +7,7 @@ def info(text: str):
     console.print(f'[bold]ℹ︎[/bold] {text}', soft_wrap=True)
 
 
-def success(text: str):
+def succeed(text: str):
     console.print(f'[green]✔[/green] {text}', soft_wrap=True)
 
 
