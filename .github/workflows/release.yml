@@ -131,18 +131,18 @@ jobs:
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: |
-              uv run pyinstaller --add-data ../capm/packages:packages -n capm -F capm/__main__.py
+              uv run pyinstaller --add-data capm/packages:packages -n capm -F capm/__main__.py
               mv dist/capm dist/capm-macos
             OUT_FILE_NAME: dist/capm-macos
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: |
-              uv run pyinstaller --add-data ../capm/packages:packages -n capm --onefile -c capm/__main__.py
+              uv run pyinstaller --add-data capm/packages:packages -n capm --onefile -c capm/__main__.py
             OUT_FILE_NAME: dist/capm.exe
           - os: ubuntu-22.04
             TARGET: linux
             CMD_BUILD: |
-              uv run pyinstaller --add-data ../capm/packages:packages -n capm -F capm/__main__.py
+              uv run pyinstaller --add-data capm/packages:packages -n capm -F capm/__main__.py
               mv dist/capm dist/capm-linux
             OUT_FILE_NAME: dist/capm-linux
     steps:
