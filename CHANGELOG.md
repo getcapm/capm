@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.3.2 (2025-08-06)
+
+### Bug Fixes
+
+- 🐛 Fix release
+  ([`1c98471`](https://github.com/getcapm/capm/commit/1c98471ae1e621e638182bf8056bdb54527ed417))
+
+### Build System
+
+- ➖ Remove pydantic-settings
+  ([`c99a0b6`](https://github.com/getcapm/capm/commit/c99a0b6b48142839ded8722d687ef65a1527a2a5))
+
+
 ## v0.3.1 (2025-08-06)
 
 ### Bug Fixes
