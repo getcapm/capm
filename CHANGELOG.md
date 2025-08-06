@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.1 (2025-08-06)
+
+### Bug Fixes
+
+- 🐛 Fixed path
+  ([`be9e90a`](https://github.com/getcapm/capm/commit/be9e90a3808c046bf644ff84633d20d809b29298))
+
+
 ## v0.3.0 (2025-08-06)
 
 ### Bug Fixes
