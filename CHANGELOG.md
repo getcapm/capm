@@ -1,6 +1,31 @@
 # CHANGELOG
 
 
+## v0.3.0 (2025-08-06)
+
+### Bug Fixes
+
+- 🐛 Bundle packages in binary
+  ([`a361ea8`](https://github.com/getcapm/capm/commit/a361ea82c6fd35e27413ca772da7ccfcf6aad502))
+
+### Chores
+
+- 🚧 Use GH Action
+  ([`f3e064f`](https://github.com/getcapm/capm/commit/f3e064f584603c59c9b634a943cbbfe44faae577))
+
+### Features
+
+- ✨ Add pre-commit hook configuration ([#2](https://github.com/getcapm/capm/pull/2),
+  [`d562afa`](https://github.com/getcapm/capm/commit/d562afaf6754e0c9f46b935e9790e1edc1980936))
+
+* feat: ✨ pre-commit configuration
+
+* fix: 🐛 Support non-tty output
+
+- ✨ Code analysis flow
+  ([`3d6e8bc`](https://github.com/getcapm/capm/commit/3d6e8bcc9f4c8148265804ae7361ae2f2a995ffd))
+
+
 ## v0.2.5 (2025-08-05)
 
 ### Bug Fixes
