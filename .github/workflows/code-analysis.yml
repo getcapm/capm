@@ -1,6 +1,9 @@
 name: code-analysis
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -12,8 +15,5 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
 
-      - name: Install capm
-        run: pipx install capm
-
-      - name: Run capm
-        run: capm run
+      - name: Run CAPM
+        uses: getcapm/capm-action@v1
