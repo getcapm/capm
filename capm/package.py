@@ -4,11 +4,11 @@ from pathlib import Path
 import docker
 import yaml
 from docker.errors import ContainerError
-from halo import Halo  # type: ignore
 
 from capm.config import config
 from capm.entities.Package import Package
 from capm.entities.PackageConfig import PackageConfig
+from capm.utils.Spinner import Spinner
 
 
 def load_packages() -> dict[str, Package]:
@@ -27,7 +27,7 @@ def load_packages() -> dict[str, Package]:
 
 def run_package(package: Package, package_config: PackageConfig, path: Path = Path('.')) -> int:
     client = docker.from_env()
-    spinner = Halo(text='Loading', spinner='dots')
+    spinner = Spinner('Loading')
     spinner.start()
     if package_config.image:
         image = package_config.image
