@@ -1,4 +1,6 @@
-from capm.config import load_config
+from capm.config import load_config, save_config_to_file
+from capm.entities.Config import Config
+from capm.entities.PackageConfig import PackageConfig
 
 
 def test_load_config_one_package():
@@ -8,9 +10,8 @@ def test_load_config_one_package():
 
     result = load_config(config)
 
-    assert isinstance(result, list)
-    assert len(result) == 1
-    assert result[0].id == 'codelimit'
+    assert len(result.packages) == 1
+    assert result.packages[0].id == 'codelimit'
 
 
 def test_load_config_two_packages():
@@ -21,10 +22,9 @@ def test_load_config_two_packages():
 
     result = load_config(config)
 
-    assert isinstance(result, list)
-    assert len(result) == 2
-    assert result[0].id == 'codelimit'
-    assert result[1].id == 'ruff'
+    assert len(result.packages) == 2
+    assert result.packages[0].id == 'codelimit'
+    assert result.packages[1].id == 'ruff'
 
 
 def test_load_config_no_packages():
@@ -32,5 +32,21 @@ def test_load_config_no_packages():
 
     result = load_config(config)
 
-    assert isinstance(result, list)
-    assert len(result) == 0
+    assert len(result.packages) == 0
+
+
+def test_save_config_to_file(tmp_path):
+    config = Config(packages=[PackageConfig(id='codelimit'), PackageConfig(id='ruff')])
+    config_path = tmp_path / 'test_config.yml'
+
+    save_config_to_file(config, config_path)
+
+    expected = ''
+    expected += 'packages:\n'
+    expected += '- id: codelimit\n'
+    expected += '- id: ruff\n'
+
+    with open(config_path, 'r') as file:
+        content = file.read()
+
+    assert content == expected

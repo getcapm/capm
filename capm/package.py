@@ -5,7 +5,7 @@ import docker
 import yaml
 from docker.errors import ContainerError
 
-from capm.config import config
+from capm.config import run_commands
 from capm.entities.Package import Package
 from capm.entities.PackageConfig import PackageConfig
 from capm.utils.Spinner import Spinner
@@ -37,12 +37,12 @@ def run_package(package: Package, package_config: PackageConfig, path: Path = Pa
     client.images.pull(image)
     spinner.text = f'[{package_config.id}] Running image: ({image})'
     args = package_config.args if package_config.args else package.args
-    report_dir = str(config.reports_dir.joinpath(package_config.id))
-    args = args.format(workspace=str(config.workspace_dir), report_dir=report_dir)
+    report_dir = str(run_commands.reports_dir.joinpath(package_config.id))
+    args = args.format(workspace=str(run_commands.workspace_dir), report_dir=report_dir)
     if package_config.extra_args:
         args = package_config.extra_args + ' ' + args
     mode = package_config.workspace_mode if package_config.workspace_mode else package.workspace_mode
-    volumes = {str(path.resolve()): {'bind': str(config.workspace_dir), 'mode': mode}}
+    volumes = {str(path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
     try:
         client.containers.run(image, args, volumes=volumes)
         spinner.succeed(f'[{package_config.id}] Package executed successfully')

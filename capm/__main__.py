@@ -7,8 +7,10 @@ import typer
 from typer import Context
 from typer.core import TyperGroup
 
-from capm.config import load_config_from_file
+from capm.config import load_config_from_file, save_config_to_file
+from capm.entities.PackageConfig import PackageConfig
 from capm.package import run_package, load_packages
+from capm.utils.utils import fail, succeed
 from capm.version import version
 
 CONFIG_FILE = Path('.capm.yml')
@@ -28,12 +30,46 @@ def run():
         print(f"{CONFIG_FILE} does not exist.")
         sys.exit(1)
     packages = load_packages()
-    package_configs = load_config_from_file(CONFIG_FILE)
-    for package_config in package_configs:
+    config = load_config_from_file(CONFIG_FILE)
+    for package_config in config.packages:
         package = packages[package_config.id]
         exit_code = run_package(package, package_config)
         if exit_code != 0:
             sys.exit(exit_code)
+
+
+@cli.command(help="Add a package")
+def add(package: Annotated[str, typer.Argument(help="Package name")]):
+    packages = load_packages()
+    if package not in packages:
+        fail(f"Package '{package}' not found.")
+        sys.exit(1)
+    config = load_config_from_file(CONFIG_FILE)
+    for p in config.packages:
+        if p.id == package:
+            fail(f"Package '{package}' is already added.")
+            sys.exit(1)
+    config.packages.append(PackageConfig(package))
+    save_config_to_file(config, CONFIG_FILE)
+    succeed(f'Package \'{package}\' added successfully.')
+
+
+@cli.command(help="Remove a package")
+def remove(package: Annotated[str, typer.Argument(help="Package name")]):
+    config = load_config_from_file(CONFIG_FILE)
+    config.packages = [p for p in config.packages if p.id != package]
+    save_config_to_file(config, CONFIG_FILE)
+    succeed(f'Package \'{package}\' removed successfully.')
+
+
+@cli.command(name="list", help="List packages")
+def list_packages():
+    config = load_config_from_file(CONFIG_FILE)
+    if not config.packages:
+        print("No packages found.")
+        return
+    for package in config.packages:
+        print(f"{package.id}")
 
 
 def _version_callback(show: bool):

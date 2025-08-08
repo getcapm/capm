@@ -1,5 +1,5 @@
 packages:
-  - id: codelimit
-  - id: ruff
-  - id: mypy
-    extra_args: --ignore-missing-imports
+- id: codelimit
+- extra_args: --ignore-missing-imports
+  id: mypy
+- id: ruff
