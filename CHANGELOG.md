@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.4.0 (2025-08-08)
+
+### Chores
+
+- 🚧 Print volumes
+  ([`6d42a93`](https://github.com/getcapm/capm/commit/6d42a93cf9a7809b448e5eebbc7a047053e9b49b))
+
+### Features
+
+- ✨ Add, list, remove commands
+  ([`267c031`](https://github.com/getcapm/capm/commit/267c031f9eb33696253bd54aa5427e2058d21825))
+
+
 ## v0.3.2 (2025-08-06)
 
 ### Bug Fixes
