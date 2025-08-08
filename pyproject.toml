@@ -36,7 +36,7 @@ build-backend = "hatchling.build"
 
 [tool.poe.tasks.bundle]
 help = "Create a binary executable using pyinstaller"
-cmd = "pyinstaller --workpath .build --clean --noconfirm --specpath dist --add-data ../capm/packages:packages -n capm capm/__main__.py"
+cmd = "pyinstaller --workpath .build --clean --noconfirm --specpath dist --add-data ../capm/packages:capm/packages -n capm capm/__main__.py"
 
 [tool.semantic_release]
 branch = "main"

@@ -43,6 +43,7 @@ def run_package(package: Package, package_config: PackageConfig, path: Path = Pa
         args = package_config.extra_args + ' ' + args
     mode = package_config.workspace_mode if package_config.workspace_mode else package.workspace_mode
     volumes = {str(path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
+    print(volumes)
     try:
         client.containers.run(image, args, volumes=volumes)
         spinner.succeed(f'[{package_config.id}] Package executed successfully')
