@@ -45,7 +45,9 @@ def run_package(package: Package, package_config: PackageConfig, path: Path = Pa
     volumes = {str(path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
     print(volumes)
     try:
-        client.containers.run(image, args, volumes=volumes)
+        output = client.containers.run(image, args, volumes=volumes)
+        if output:
+            print(output.decode('utf-8'))
         spinner.succeed(f'[{package_config.id}] Package executed successfully')
         return 0
     except ContainerError as e:
