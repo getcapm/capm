@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.6.0 (2025-08-09)
+
+### Features
+
+- ✨ Show output
+  ([`c15c47c`](https://github.com/getcapm/capm/commit/c15c47cf7d036bc99308446c4224b6d700825c2b))
+
+
 ## v0.5.0 (2025-08-09)
 
 ### Features
