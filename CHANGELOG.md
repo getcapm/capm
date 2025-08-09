@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.5.0 (2025-08-09)
+
+### Features
+
+- ✨ Add Ubuntu
+  ([`160c295`](https://github.com/getcapm/capm/commit/160c295864807892ef34807313f490d7c8edeb13))
+
+
 ## v0.4.0 (2025-08-08)
 
 ### Chores
