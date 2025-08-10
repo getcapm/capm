@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.7.0 (2025-08-10)
+
+### Features
+
+- ✨ Add show ouput option to run command
+  ([`972d42a`](https://github.com/getcapm/capm/commit/972d42ac8a55f83dacf9e04e6d97d341e4db09b1))
+
+
 ## v0.6.0 (2025-08-09)
 
 ### Features

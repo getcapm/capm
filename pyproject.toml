@@ -1,6 +1,6 @@
 [project]
 name = "capm"
-version = "0.6.0"
+version = "0.7.0"
 description = "Code Analysis Package Manager"
 authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
