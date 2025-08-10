@@ -25,7 +25,7 @@ def load_packages() -> dict[str, Package]:
     return result
 
 
-def run_package(package: Package, package_config: PackageConfig, path: Path = Path('.')) -> int:
+def run_package(package: Package, package_config: PackageConfig, show_output: bool, path: Path = Path('.')) -> int:
     client = docker.from_env()
     spinner = Spinner('Loading')
     spinner.start()
@@ -43,10 +43,9 @@ def run_package(package: Package, package_config: PackageConfig, path: Path = Pa
         args = package_config.extra_args + ' ' + args
     mode = package_config.workspace_mode if package_config.workspace_mode else package.workspace_mode
     volumes = {str(path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
-    print(volumes)
     try:
         output = client.containers.run(image, args, volumes=volumes)
-        if output:
+        if output and show_output:
             print(output.decode('utf-8'))
         spinner.succeed(f'[{package_config.id}] Package executed successfully')
         return 0

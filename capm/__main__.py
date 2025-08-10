@@ -25,7 +25,7 @@ cli = typer.Typer(cls=OrderCommands, no_args_is_help=True, add_completion=False)
 
 
 @cli.command(help="Run code analysis")
-def run():
+def run(show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
     if not os.path.exists(CONFIG_FILE):
         print(f"{CONFIG_FILE} does not exist.")
         sys.exit(1)
@@ -33,7 +33,7 @@ def run():
     config = load_config_from_file(CONFIG_FILE)
     for package_config in config.packages:
         package = packages[package_config.id]
-        exit_code = run_package(package, package_config)
+        exit_code = run_package(package, package_config, show_output)
         if exit_code != 0:
             sys.exit(exit_code)
 
