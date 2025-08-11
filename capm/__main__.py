@@ -25,17 +25,25 @@ cli = typer.Typer(cls=OrderCommands, no_args_is_help=True, add_completion=False)
 
 
 @cli.command(help="Run code analysis")
-def run(show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
-    if not os.path.exists(CONFIG_FILE):
-        print(f"{CONFIG_FILE} does not exist.")
-        sys.exit(1)
-    packages = load_packages()
-    config = load_config_from_file(CONFIG_FILE)
-    for package_config in config.packages:
-        package = packages[package_config.id]
-        exit_code = run_package(package, package_config, show_output)
-        if exit_code != 0:
-            sys.exit(exit_code)
+def run(packages: Annotated[list[str], typer.Argument(help="Package names", show_default=False)] = None,
+        show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
+    package_repository = load_packages()
+    if packages:
+        for package in packages:
+            package_definition = package_repository[package]
+            exit_code = run_package(package_definition, PackageConfig(package), show_output)
+            if exit_code != 0:
+                sys.exit(exit_code)
+    else:
+        if not os.path.exists(CONFIG_FILE):
+            print(f"{CONFIG_FILE} does not exist.")
+            sys.exit(1)
+        config = load_config_from_file(CONFIG_FILE)
+        for package_config in config.packages:
+            package_definition = package_repository[package_config.id]
+            exit_code = run_package(package_definition, package_config, show_output)
+            if exit_code != 0:
+                sys.exit(exit_code)
 
 
 @cli.command(help="Add a package")
