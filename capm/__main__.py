@@ -28,14 +28,15 @@ package_repository: dict[str, PackageDefinition] = {}
 
 @cli.command(help="Run code analysis")
 def run(packages: Annotated[list[str] | None, typer.Argument(help="Package names", show_default=False)] = None,
-        show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
+        show_output: Annotated[bool | None, typer.Option(help="Show output of packages", show_default=False)] = None):
     if packages:
         for package in packages:
             if package not in package_repository:
                 fail(f"Package '{package}' does not exist.")
                 sys.exit(1)
             package_definition = package_repository[package]
-            exit_code = run_package(package_definition, PackageConfig(package), show_output)
+            exit_code = run_package(package_definition, PackageConfig(package),
+                                    show_output if show_output is not None else True)
             if exit_code != 0:
                 sys.exit(exit_code)
     else:
@@ -48,7 +49,8 @@ def run(packages: Annotated[list[str] | None, typer.Argument(help="Package names
                 fail(f"Package '{package_config.id}' does not exist.")
                 sys.exit(1)
             package_definition = package_repository[package_config.id]
-            exit_code = run_package(package_definition, package_config, show_output)
+            exit_code = run_package(package_definition, package_config,
+                                    show_output if show_output is not None else False)
             if exit_code != 0:
                 sys.exit(exit_code)
 

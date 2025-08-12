@@ -1,4 +1,6 @@
 image: python:3.12-slim-bookworm
 install_command: pip install xenon
 entrypoint: xenon
-args: --max-absolute=B --max-modules=B --max-average=A {workspace}
+args: '--max-absolute=B --max-modules=B --max-average=A {workspace}'
+website: https://github.com/rubik/xenon
+about: Monitoring tool based on radon

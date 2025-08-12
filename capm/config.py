@@ -27,6 +27,7 @@ def load_config_from_file(path: Path) -> Config:
 
 def save_config_to_file(config: Config, path: Path):
     def dict_factory(x: list[tuple[str, Any]]) -> dict: return {k: v for (k, v) in x if v is not None}
+
     with open(path, 'w') as file:
         yaml.dump(asdict(config, dict_factory=dict_factory), file)
 

@@ -1,3 +1,5 @@
 image: getcodelimit/codelimit:latest
-args: check {workspace}
+args: 'check {workspace}'
 workspace_mode: rw
+website: https://getcodelimit.github.io/
+about: Your Refactoring Alarm
