@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v0.8.0 (2025-08-12)
+
+### Bug Fixes
+
+- 🐛 Handle missing package definition
+  ([`bfac4af`](https://github.com/getcapm/capm/commit/bfac4af08740b69ec6f5afdc27a879d3f3f6ab94))
+
+### Continuous Integration
+
+- 💚 Fix tests
+  ([`6f81a66`](https://github.com/getcapm/capm/commit/6f81a66f5e1ebbb37c20a4b35fe8913e7f2db9fc))
+
+### Features
+
+- ✨ Add Radon and Xenon
+  ([`4b45882`](https://github.com/getcapm/capm/commit/4b4588277a85129c6ba90b9946f32b8451c7286e))
+
+
 ## v0.7.0 (2025-08-10)
 
 ### Features
