@@ -27,7 +27,7 @@ package_repository: dict[str, PackageDefinition] = {}
 
 
 @cli.command(help="Run code analysis")
-def run(packages: Annotated[list[str], typer.Argument(help="Package names", show_default=False)] = None,
+def run(packages: Annotated[list[str] | None, typer.Argument(help="Package names", show_default=False)] = None,
         show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
     if packages:
         for package in packages:

@@ -1,3 +1,4 @@
 packages:
-- id: xenon
 - id: codelimit
+- id: mypy
+- id: ruff
