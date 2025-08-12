@@ -21,7 +21,6 @@ def load_packages() -> dict[str, PackageDefinition]:
             d = yaml.safe_load(file)
             package_id = path.splitext(path.basename(yml_file))[0]
             result[package_id] = PackageDefinition(**d)
-    print(f"Loaded {len(result)} package definitions")
     return result
 
 

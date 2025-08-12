@@ -9,9 +9,10 @@ from typer.core import TyperGroup
 
 from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
+from capm.entities.PackageDefinition import PackageDefinition
 from capm.package import run_package, load_packages
-from capm.utils.utils import fail, succeed
-from capm.version import version
+from capm.utils.utils import fail, succeed, console
+import capm.version
 
 CONFIG_FILE = Path('.capm.yml')
 
@@ -22,14 +23,17 @@ class OrderCommands(TyperGroup):
 
 
 cli = typer.Typer(cls=OrderCommands, no_args_is_help=True, add_completion=False)
+package_repository: dict[str, PackageDefinition] = {}
 
 
 @cli.command(help="Run code analysis")
 def run(packages: Annotated[list[str], typer.Argument(help="Package names", show_default=False)] = None,
         show_output: Annotated[bool, typer.Option('--show-output', help="Show output of packages")] = False):
-    package_repository = load_packages()
     if packages:
         for package in packages:
+            if package not in package_repository:
+                fail(f"Package '{package}' does not exist.")
+                sys.exit(1)
             package_definition = package_repository[package]
             exit_code = run_package(package_definition, PackageConfig(package), show_output)
             if exit_code != 0:
@@ -40,6 +44,9 @@ def run(packages: Annotated[list[str], typer.Argument(help="Package names", show
             sys.exit(1)
         config = load_config_from_file(CONFIG_FILE)
         for package_config in config.packages:
+            if package_config.id not in package_repository:
+                fail(f"Package '{package_config.id}' does not exist.")
+                sys.exit(1)
             package_definition = package_repository[package_config.id]
             exit_code = run_package(package_definition, package_config, show_output)
             if exit_code != 0:
@@ -48,9 +55,8 @@ def run(packages: Annotated[list[str], typer.Argument(help="Package names", show
 
 @cli.command(help="Add a package")
 def add(package: Annotated[str, typer.Argument(help="Package name")]):
-    packages = load_packages()
-    if package not in packages:
-        fail(f"Package '{package}' not found.")
+    if package not in package_repository:
+        fail(f"Package '{package}' does not exist.")
         sys.exit(1)
     config = load_config_from_file(CONFIG_FILE)
     for p in config.packages:
@@ -82,7 +88,9 @@ def list_packages():
 
 def _version_callback(show: bool):
     if show:
-        print(f"CAPM version: {version}")
+        global package_repository
+        package_repository = load_packages()
+        console.print(f"CAPM v. {capm.version.version} [{len(package_repository)} package definitions]")
         raise typer.Exit()
 
 
@@ -96,7 +104,8 @@ def main(
         ] = None,
 ):
     """CAPM: Code Analysis Package Manager"""
-
+    global package_repository
+    package_repository = load_packages()
     if version:
         raise typer.Exit()
 
