@@ -20,7 +20,7 @@ Documentation = "https://getcapm.github.io"
 Source = "https://github.com/getcapm/capm"
 
 [project.scripts]
-capm = "capm.__main__:cli"
+capm = "capm.__main__:main"
 
 [dependency-groups]
 dev = [

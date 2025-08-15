@@ -1,4 +1,4 @@
 image: getcapm/mypy:latest
 args: '--install-types --non-interactive --ignore-missing-imports {workspace}'
-website: https://github.com/python/mypy
+repository: https://github.com/python/mypy
 about: Optional static typing for Python

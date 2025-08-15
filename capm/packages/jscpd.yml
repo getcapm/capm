@@ -1,0 +1,6 @@
+image: node:22-alpine
+install_command: npm install -g jscpd
+entrypoint: jscpd
+args: '{workspace}'
+repository: https://github.com/kucherenko/jscpd
+about: Copy/paste detector for programming source code.

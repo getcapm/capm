@@ -1,4 +1,4 @@
 image: ghcr.io/astral-sh/ruff:0.12.7
 args: 'check {workspace}'
-website: https://github.com/astral-sh/ruff
+repository: https://github.com/astral-sh/ruff
 about: An extremely fast Python linter and code formatter, written in Rust.

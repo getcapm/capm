@@ -50,12 +50,17 @@ def run_package(package_definition: PackageDefinition, package_config: PackageCo
     mode = package_config.workspace_mode if package_config.workspace_mode else package_definition.workspace_mode
     volumes = {str(path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
     try:
-        output = client.containers.run(image, command, volumes=volumes, tty=True, remove=True)
+        output = client.containers.run(image, command, volumes=volumes, tty=True, remove=False,
+                                       working_dir=str(run_commands.workspace_dir))
         spinner.succeed(f'[{package_config.id}] Package executed successfully')
         if output and show_output:
             print(output.decode('utf-8'))
-        return 0
+
+        exit_code = 0
     except ContainerError as e:
         spinner.fail(f"[{package_config.id}] Error running package, exit code: {e.exit_status}")
         print(e.container.logs().decode('utf-8'))
-        return e.exit_status
+        exit_code = e.exit_status
+    finally:
+        client.containers.prune()
+    return exit_code

@@ -7,12 +7,12 @@ import typer
 from typer import Context
 from typer.core import TyperGroup
 
+import capm.version
 from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.package import run_package, load_packages
 from capm.utils.utils import fail, succeed, console
-import capm.version
 
 CONFIG_FILE = Path('.capm.yml')
 
@@ -26,9 +26,8 @@ cli = typer.Typer(cls=OrderCommands, no_args_is_help=True, add_completion=False)
 package_repository: dict[str, PackageDefinition] = {}
 
 
-@cli.command(help="Run code analysis")
-def run(packages: Annotated[list[str] | None, typer.Argument(help="Package names", show_default=False)] = None,
-        show_output: Annotated[bool | None, typer.Option(help="Show output of packages", show_default=False)] = None):
+@cli.command(help="Run all configured packages")
+def check(show_output: Annotated[bool | None, typer.Option(help="Show output of packages", show_default=False)] = None):
     if packages:
         for package in packages:
             if package not in package_repository:
@@ -88,6 +87,12 @@ def list_packages():
         print(f"{package.id}")
 
 
+@cli.command(help='Run single package')
+def run(_: Annotated[str, typer.Argument(metavar='PACKAGE', help="Package name")],
+        __: Annotated[str, typer.Argument(metavar='ARGS', help="Arguments for the package")]):
+    pass
+
+
 def _version_callback(show: bool):
     if show:
         global package_repository
@@ -97,7 +102,7 @@ def _version_callback(show: bool):
 
 
 @cli.callback()
-def main(
+def cli_callback(
         version: Annotated[
             Optional[bool],
             typer.Option(
@@ -106,11 +111,26 @@ def main(
         ] = None,
 ):
     """CAPM: Code Analysis Package Manager"""
-    global package_repository
-    package_repository = load_packages()
     if version:
         raise typer.Exit()
 
 
+def main():
+    global package_repository
+    package_repository = load_packages()
+    if len(sys.argv) > 1 and sys.argv[1] == 'run' and len(sys.argv) >= 3:
+        package = sys.argv[2]
+        if package not in package_repository:
+            fail(f"Package '{package}' does not exist.")
+            sys.exit(1)
+        package_definition = package_repository[package]
+        args = ' '.join(sys.argv[3:])
+        exit_code = run_package(package_definition, PackageConfig(package, args=args), True)
+        if exit_code != 0:
+            sys.exit(exit_code)
+    else:
+        cli()
+
+
 if __name__ == "__main__":
-    cli()
+    main()

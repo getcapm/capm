@@ -8,5 +8,6 @@ class PackageDefinition:
     install_command: str | None = None
     entrypoint: str | None = None
     workspace_mode: str = 'ro'
-    website: str | None = None
+    repository: str | None = None
     about: str | None = None
+    website: str | None = None
