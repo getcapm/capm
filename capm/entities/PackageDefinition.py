@@ -7,7 +7,7 @@ class PackageDefinition:
     args: str
     install_command: str | None = None
     entrypoint: str | None = None
-    workspace_mode: str = 'ro'
+    workspace_mode: str = 'rw'
     repository: str | None = None
     about: str | None = None
     website: str | None = None
