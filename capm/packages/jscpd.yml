@@ -1,5 +1,6 @@
 image: node:22-alpine
-install_command: npm install -g jscpd
+version: 4.0.5
+install_command: 'npm install -g jscpd@{version}'
 entrypoint: jscpd
 args: '{workspace}'
 repository: https://github.com/kucherenko/jscpd

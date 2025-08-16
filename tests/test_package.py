@@ -6,5 +6,5 @@ def test_load_packages():
 
     assert len(packages) > 0
     assert 'xenon' in packages
-    assert packages['xenon'].install_command == 'pip install xenon'
+    assert packages['xenon'].install_command == 'pip install xenon=={version}'
     assert packages['xenon'].entrypoint == 'xenon'

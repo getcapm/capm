@@ -4,6 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class PackageDefinition:
     image: str
+    version: str
     args: str
     install_command: str | None = None
     entrypoint: str | None = None

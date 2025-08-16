@@ -9,6 +9,7 @@ from capm.config import run_commands
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.utils.Spinner import Spinner
+from capm.utils.utils import fail
 from capm.version import version
 
 
@@ -21,7 +22,10 @@ def load_packages() -> dict[str, PackageDefinition]:
         with open(yml_file, 'r') as file:
             d = yaml.safe_load(file)
             package_id = path.splitext(path.basename(yml_file))[0]
-            result[package_id] = PackageDefinition(**d)
+            try:
+                result[package_id] = PackageDefinition(**d)
+            except TypeError as e:
+                fail(f'Error loading package \'{package_id}\': {str(e)}')
     return result
 
 
@@ -38,7 +42,9 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
     if not _image_exists(docker_client, base_image):
         docker_client.images.pull(base_image)
     if package_definition.install_command:
-        command = f'/bin/sh -c \'{package_definition.install_command} >/dev/null 2>&1\''
+        package_version = package_config.version if package_config.version else package_definition.version
+        install_command = package_definition.install_command.format(version=package_version)
+        command = f'/bin/sh -c \'{install_command} >/dev/null 2>&1\''
         try:
             container = docker_client.containers.run(base_image, tty=True, remove=True, detach=True)
             container.exec_run(command)
