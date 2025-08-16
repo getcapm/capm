@@ -26,6 +26,21 @@ cli = typer.Typer(cls=OrderCommands, no_args_is_help=True, add_completion=False)
 package_repository: dict[str, PackageDefinition] = {}
 
 
+@cli.command(help="Add a package")
+def add(package: Annotated[str, typer.Argument(help="Package name")]):
+    if package not in package_repository:
+        fail(f"Package '{package}' does not exist.")
+        sys.exit(1)
+    config = load_config_from_file(CONFIG_FILE)
+    for p in config.packages:
+        if p.id == package:
+            fail(f"Package '{package}' is already added.")
+            sys.exit(1)
+    config.packages.append(PackageConfig(package))
+    save_config_to_file(config, CONFIG_FILE)
+    succeed(f'Package \'{package}\' added successfully.')
+
+
 @cli.command(help="Run all configured packages")
 def check(show_output: Annotated[bool | None, typer.Option(help="Show output of packages", show_default=False)] = None):
     if not os.path.exists(CONFIG_FILE):
@@ -43,27 +58,13 @@ def check(show_output: Annotated[bool | None, typer.Option(help="Show output of 
             sys.exit(exit_code)
 
 
-@cli.command(help="Add a package")
-def add(package: Annotated[str, typer.Argument(help="Package name")]):
-    if package not in package_repository:
-        fail(f"Package '{package}' does not exist.")
-        sys.exit(1)
-    config = load_config_from_file(CONFIG_FILE)
-    for p in config.packages:
-        if p.id == package:
-            fail(f"Package '{package}' is already added.")
-            sys.exit(1)
-    config.packages.append(PackageConfig(package))
-    save_config_to_file(config, CONFIG_FILE)
-    succeed(f'Package \'{package}\' added successfully.')
-
-
-@cli.command(help="Remove a package")
-def remove(package: Annotated[str, typer.Argument(help="Package name")]):
-    config = load_config_from_file(CONFIG_FILE)
-    config.packages = [p for p in config.packages if p.id != package]
-    save_config_to_file(config, CONFIG_FILE)
-    succeed(f'Package \'{package}\' removed successfully.')
+@cli.command(help="Show information about packages")
+def info():
+    print(f"{'PACKAGE':20s} {'VERSION':8s}")
+    packages = sorted(package_repository.keys())
+    for k in packages:
+        v = package_repository[k]
+        print(f"{k:20s} {str(v.version):8s}")
 
 
 @cli.command(name="list", help="List packages")
@@ -74,6 +75,14 @@ def list_packages():
         return
     for package in config.packages:
         print(f"{package.id}")
+
+
+@cli.command(help="Remove a package")
+def remove(package: Annotated[str, typer.Argument(help="Package name")]):
+    config = load_config_from_file(CONFIG_FILE)
+    config.packages = [p for p in config.packages if p.id != package]
+    save_config_to_file(config, CONFIG_FILE)
+    succeed(f'Package \'{package}\' removed successfully.')
 
 
 @cli.command(help='Run single package')
