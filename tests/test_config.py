@@ -5,7 +5,7 @@ from capm.entities.PackageConfig import PackageConfig
 
 def test_load_config_one_package():
     config = ''
-    config += 'package:\n'
+    config += 'packages:\n'
     config += '  - id: codelimit\n'
 
     result = load_config(config)
@@ -16,7 +16,7 @@ def test_load_config_one_package():
 
 def test_load_config_two_packages():
     config = ''
-    config += 'package:\n'
+    config += 'packages:\n'
     config += '  - id: codelimit\n'
     config += '  - id: ruff\n'
 

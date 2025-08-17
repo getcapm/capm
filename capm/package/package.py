@@ -116,8 +116,9 @@ def run_package(package_definition: PackageDefinition, package_config: PackageCo
     exit_code, output = _run_image(docker_client, image_name, package_definition, package_config, codebase_path)
     if exit_code == 0:
         spinner.succeed(f'[{package_config.id}] Package executed successfully')
+        if show_output:
+            print(output)
     else:
         spinner.fail(f"[{package_config.id}] Error running package, exit code: {exit_code}")
-    if show_output:
         print(output)
     return exit_code

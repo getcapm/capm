@@ -12,7 +12,7 @@ def load_config(data: str) -> Config:
     config_dict = yaml.safe_load(data)
     if not config_dict:
         return Config()
-    package_configs_list = config_dict.get('package', [])
+    package_configs_list = config_dict.get('packages', [])
     package_configs = [PackageConfig(**pc) for pc in package_configs_list]
     return Config(packages=package_configs)
 

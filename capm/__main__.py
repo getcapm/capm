@@ -2,7 +2,6 @@ import os
 import sys
 from dataclasses import asdict
 from pathlib import Path
-from pprint import pprint
 from typing import Annotated, Optional, Any
 
 import inquirer
