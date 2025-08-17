@@ -5,3 +5,4 @@ entrypoint: jscpd
 args: '{workspace}'
 repository: https://github.com/kucherenko/jscpd
 about: Copy/paste detector for programming source code.
+type: duplication

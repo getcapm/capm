@@ -6,3 +6,5 @@ args: '--directory {workspace}'
 repository: https://github.com/bridgecrewio/checkov
 about: Prevent cloud misconfigurations and find vulnerabilities
 website: https://www.checkov.io/
+technology: Terraform, CloudFormation, Kubernetes, Helm
+type: linter

@@ -15,7 +15,7 @@ from capm.version import version
 
 def load_packages() -> dict[str, PackageDefinition]:
     result: dict[str, PackageDefinition] = {}
-    packages_dir = Path(__file__).parent.joinpath('packages')
+    packages_dir = Path(__file__).parent / 'definitions'
     yml_files = [packages_dir.joinpath(f) for f in listdir(packages_dir) if
                  packages_dir.joinpath(f).is_file() and f.endswith('.yml')]
     for yml_file in yml_files:
@@ -23,9 +23,11 @@ def load_packages() -> dict[str, PackageDefinition]:
             d = yaml.safe_load(file)
             package_id = path.splitext(path.basename(yml_file))[0]
             try:
-                result[package_id] = PackageDefinition(**d)
+                package_definition = PackageDefinition(**d)
+                result[package_id] = package_definition
             except TypeError as e:
                 fail(f'Error loading package \'{package_id}\': {str(e)}')
+                raise e
     return result
 
 
@@ -61,7 +63,7 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
 
 
 def _run_image(docker_client, image_name: str, package_definition: PackageDefinition, package_config: PackageConfig,
-               codebase_path: Path = Path('.')) -> tuple[int, str]:
+               codebase_path: Path = Path('..')) -> tuple[int, str]:
     args = package_config.args if package_config.args else package_definition.args
     report_dir = str(run_commands.reports_dir.joinpath(package_config.id))
     command = ''
@@ -86,7 +88,7 @@ def _run_image(docker_client, image_name: str, package_definition: PackageDefini
 
 
 def run_package(package_definition: PackageDefinition, package_config: PackageConfig, show_output: bool,
-                codebase_path: Path = Path('.')) -> int:
+                codebase_path: Path = Path('..')) -> int:
     docker_client = docker.from_env()
     spinner = Spinner('Loading')
     spinner.start()

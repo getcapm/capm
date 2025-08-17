@@ -6,3 +6,4 @@ args: 'check {workspace}'
 repository: https://github.com/getcodelimit/codelimit
 about: Your Refactoring Alarm
 website: https://getcodelimit.github.io/
+type: linter

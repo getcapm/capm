@@ -5,3 +5,4 @@ entrypoint: xenon
 args: '--max-absolute=B --max-modules=B --max-average=A {workspace}'
 repository: https://github.com/rubik/xenon
 about: Monitoring tool based on radon
+type: complexity

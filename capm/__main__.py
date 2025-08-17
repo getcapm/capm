@@ -1,9 +1,13 @@
 import os
 import sys
+from dataclasses import asdict
 from pathlib import Path
-from typing import Annotated, Optional
+from pprint import pprint
+from typing import Annotated, Optional, Any
 
+import inquirer
 import typer
+import yaml
 from typer import Context
 from typer.core import TyperGroup
 
@@ -11,7 +15,7 @@ import capm.version
 from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
-from capm.package import run_package, load_packages
+from capm.package.package import run_package, load_packages
 from capm.utils.utils import fail, succeed, console
 
 CONFIG_FILE = Path('.capm.yml')
@@ -41,8 +45,8 @@ def add(package: Annotated[str, typer.Argument(help="Package name")]):
     succeed(f'Package \'{package}\' added successfully.')
 
 
-@cli.command(help="Run all configured packages")
-def check(show_output: Annotated[bool | None, typer.Option(help="Show output of packages", show_default=False)] = None):
+@cli.command(help="Run all configured package")
+def check(show_output: Annotated[bool | None, typer.Option(help="Show output of package", show_default=False)] = None):
     if not os.path.exists(CONFIG_FILE):
         print(f"{CONFIG_FILE} does not exist.")
         sys.exit(1)
@@ -58,7 +62,39 @@ def check(show_output: Annotated[bool | None, typer.Option(help="Show output of 
             sys.exit(exit_code)
 
 
-@cli.command(help="Show information about packages")
+@cli.command(help="Create new package")
+def create():
+    questions = [
+        inquirer.List('image', 'Base image for package?',
+                      ["docker.io/library/python:3.11-slim", "docker.io/library/node:22-alpine"]),
+        inquirer.Text('version', 'Version of package?'),
+        inquirer.Text('install_command', 'Install command?'),
+        inquirer.Text('entrypoint', 'Entrypoint?'),
+        inquirer.Text('args', 'Arguments?'),
+        inquirer.Text('repository', 'Repository?'),
+        inquirer.Text('about', 'About?'),
+        inquirer.Text('website', 'Website?'),
+        inquirer.Text('technology', 'Technology?'),
+        inquirer.List('type', 'Type?', ['linter', 'formatter', 'analyzer', 'duplication', 'complexity', 'other']),
+    ]
+    optional = ['install_command', 'entrypoint', 'repository', 'about', 'website', 'technology']
+    answers = inquirer.prompt(questions)
+    if not answers:
+        return
+    package_definition = PackageDefinition(**answers)
+
+    def dict_factory(x: list[tuple[str, Any]]) -> dict:
+        result = {}
+        for k, v in x:
+            if v is None or v == '' and k in optional:
+                continue
+            result[k] = v
+        return result
+
+    print(yaml.dump(asdict(package_definition, dict_factory=dict_factory)))
+
+
+@cli.command(help="Show information about package")
 def info():
     print(f"{'PACKAGE':20s} {'VERSION':8s}")
     packages = sorted(package_repository.keys())
@@ -67,11 +103,11 @@ def info():
         print(f"{k:20s} {str(v.version):8s}")
 
 
-@cli.command(name="list", help="List packages")
+@cli.command(name="list", help="List package")
 def list_packages():
     config = load_config_from_file(CONFIG_FILE)
     if not config.packages:
-        print("No packages found.")
+        print("No package found.")
         return
     for package in config.packages:
         print(f"{package.id}")

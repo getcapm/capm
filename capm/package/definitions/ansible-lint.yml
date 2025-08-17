@@ -6,3 +6,5 @@ args: '{workspace}'
 repository: https://github.com/ansible/ansible-lint
 about: Checks and fixes playbooks for practices and behavior that could potentially be improved
 website: https://ansible.readthedocs.io/projects/lint/
+technology: Ansible
+type: linter

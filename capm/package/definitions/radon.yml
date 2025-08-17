@@ -5,3 +5,4 @@ entrypoint: radon
 args: 'cc {workspace}'
 repository: https://github.com/rubik/radon
 about: Various code metrics for Python code
+type: analyzer

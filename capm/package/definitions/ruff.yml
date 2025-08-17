@@ -5,3 +5,4 @@ entrypoint: ruff
 args: 'check {workspace}'
 repository: https://github.com/astral-sh/ruff
 about: An extremely fast Python linter and code formatter, written in Rust.
+type: linter

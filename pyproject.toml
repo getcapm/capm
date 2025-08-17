@@ -10,6 +10,7 @@ dependencies = [
     "click<8.2.0",
     "docker>=7.1.0",
     "halo>=0.0.31",
+    "inquirer>=3.4.1",
     "pyyaml>=6.0.2",
     "typer>=0.16.0",
 ]
@@ -36,7 +37,7 @@ build-backend = "hatchling.build"
 
 [tool.poe.tasks.bundle]
 help = "Create a binary executable using pyinstaller"
-cmd = "pyinstaller --workpath .build --clean --noconfirm --specpath dist --add-data ../capm/packages:capm/packages -n capm capm/__main__.py"
+cmd = "pyinstaller --workpath .build --clean --noconfirm --specpath dist --add-data ../capm/package/definitions:capm/package/definitions -n capm capm/__main__.py"
 
 [tool.semantic_release]
 branch = "main"

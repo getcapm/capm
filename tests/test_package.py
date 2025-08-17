@@ -1,4 +1,4 @@
-from capm.package import load_packages
+from capm.package.package import load_packages
 
 
 def test_load_packages():

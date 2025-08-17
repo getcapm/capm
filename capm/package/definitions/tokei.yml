@@ -5,3 +5,4 @@ entrypoint: tokei
 args: '{workspace}'
 repository: https://github.com/XAMPPRocky/tokei
 about: Count your code, quickly.
+type: analyzer

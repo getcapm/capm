@@ -5,3 +5,4 @@ entrypoint: mypy
 args: '--install-types --non-interactive --ignore-missing-imports {workspace}'
 repository: https://github.com/python/mypy
 about: Optional static typing for Python
+type: linter
