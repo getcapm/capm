@@ -2,9 +2,8 @@ import os
 import sys
 from dataclasses import asdict
 from pathlib import Path
-from typing import Annotated, Optional, Any
+from typing import Annotated, Optional
 
-import inquirer
 import typer
 import yaml
 from typer import Context
@@ -15,7 +14,8 @@ from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.package.package import run_package, load_packages
-from capm.utils.utils import fail, succeed, console
+from capm.utils.cli_utils import fail, succeed, console, read_input
+from capm.utils.utils import data_class_to_dict
 
 CONFIG_FILE = Path('.capm.yml')
 
@@ -63,34 +63,28 @@ def check(show_output: Annotated[bool | None, typer.Option(help="Show output of 
 
 @cli.command(help="Create new package")
 def create():
-    questions = [
-        inquirer.List('image', 'Base image for package?',
-                      ["docker.io/library/python:3.11-slim", "docker.io/library/node:22-alpine"]),
-        inquirer.Text('version', 'Version of package?'),
-        inquirer.Text('install_command', 'Install command?'),
-        inquirer.Text('entrypoint', 'Entrypoint?'),
-        inquirer.Text('args', 'Arguments?'),
-        inquirer.Text('repository', 'Repository?'),
-        inquirer.Text('about', 'About?'),
-        inquirer.Text('website', 'Website?'),
-        inquirer.Text('technology', 'Technology?'),
-        inquirer.List('type', 'Type?', ['linter', 'formatter', 'analyzer', 'duplication', 'complexity', 'other']),
-    ]
-    optional = ['install_command', 'entrypoint', 'repository', 'about', 'website', 'technology']
-    answers = inquirer.prompt(questions)
-    if not answers:
-        return
-    package_definition = PackageDefinition(**answers)
-
-    def dict_factory(x: list[tuple[str, Any]]) -> dict:
-        result = {}
-        for k, v in x:
-            if v is None or v == '' and k in optional:
-                continue
-            result[k] = v
-        return result
-
-    print(yaml.dump(asdict(package_definition, dict_factory=dict_factory)))
+    image = read_input('Base image for package',
+                       ['docker.io/library/python:3.11-slim', 'docker.io/library/node:22-alpine',
+                        'docker.io/library/alpine:3.22.1', 'demisto/powershell:7.5.0.3759715',
+                        'docker.io/library/ubuntu:24.04'])
+    version = read_input('Version of package')
+    install_command = read_input('Install command (optional)')
+    entrypoint = read_input('Entrypoint (optional)')
+    args = read_input('Arguments', default='')
+    repository = read_input('Repository (optional)')
+    about = read_input('About (optional)')
+    website = read_input('Website (optional)')
+    technology = read_input('Technology (optional)')
+    package_type = read_input('Type', ['linter', 'formatter', 'analyzer', 'duplication', 'complexity', 'other'])
+    package_definition = PackageDefinition(image=image, version=version, args=args, type=package_type,
+                                           install_command=install_command,
+                                           entrypoint=entrypoint, repository=repository, about=about, website=website,
+                                           technology=technology)
+    print(yaml.dump(data_class_to_dict(package_definition)))
+    package_id = read_input('Package ID')
+    if package_id:
+        with open(f'{package_id}.yml', 'w') as file:
+            yaml.dump(data_class_to_dict(package_definition), file)
 
 
 @cli.command(help="Show information about package")

@@ -2,7 +2,7 @@ import sys
 
 from halo import Halo
 
-from capm.utils.utils import info, succeed, fail
+from capm.utils.cli_utils import info, succeed, fail
 
 
 class Spinner:

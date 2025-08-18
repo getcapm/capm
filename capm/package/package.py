@@ -9,7 +9,7 @@ from capm.config import run_commands
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.utils.Spinner import Spinner
-from capm.utils.utils import fail
+from capm.utils.cli_utils import fail
 from capm.version import version
 
 
@@ -46,10 +46,14 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
     if package_definition.install_command:
         package_version = package_config.version if package_config.version else package_definition.version
         install_command = package_definition.install_command.format(version=package_version)
-        command = f'/bin/sh -c \'{install_command} >/dev/null 2>&1\''
+        install_command = install_command.replace('"', '\\"').replace("'", "\\'")
+        install_command = ' && '.join(install_command.strip().split('\n'))
+        command = f'/bin/sh -c \'({install_command}) >/dev/null 2>&1\''
         try:
             container = docker_client.containers.run(base_image, tty=True, remove=True, detach=True)
-            container.exec_run(command)
+            exec_result = container.exec_run(command)
+            if exec_result.exit_code != 0:
+                return exec_result.exit_code, exec_result.output.decode('utf-8')
             output = container.logs()
             container.commit(f'capm-{package_config.id}', version)
             container.stop()
@@ -97,12 +101,15 @@ def run_package(package_definition: PackageDefinition, package_config: PackageCo
         if not _image_exists(docker_client, image_name):
             spinner.text = f'[{package_config.id}] Building image: {image_name}'
             try:
-                _build_image(docker_client, package_definition, package_config)
+                exit_code, output = _build_image(docker_client, package_definition, package_config)
+                if exit_code != 0:
+                    spinner.fail(f"[{package_config.id}] Error building image, exit code: {exit_code}")
+                    print(output)
+                    return exit_code
             except ContainerError as e:
                 exit_code = int(e.exit_status)
                 spinner.fail(f"[{package_config.id}] Error building image, exit code: {exit_code}")
-                if show_output:
-                    print(e.container.logs().decode('utf-8'))
+                print(e.container.logs().decode('utf-8'))
                 return exit_code
             except DockerException as e:
                 spinner.fail(f"[{package_config.id}] Error building image, reason: {str(e)}")

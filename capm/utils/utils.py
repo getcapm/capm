@@ -1,15 +1,8 @@
-from rich.console import Console  # type: ignore
-
-console = Console()
-
-
-def info(text: str):
-    console.print(f'[bold]ℹ︎[/bold] {text}', soft_wrap=True)
+from dataclasses import asdict
+from typing import Any
 
 
-def succeed(text: str):
-    console.print(f'[green]✔[/green] {text}', soft_wrap=True)
+def data_class_to_dict(data_class: Any):
+    def dict_factory(x: list[tuple[str, Any]]) -> dict: return {k: v for (k, v) in x if v is not None}
 
-
-def fail(text: str):
-    console.print(f'[red]⨯[/red] {text}', soft_wrap=True)
+    return asdict(data_class, dict_factory=dict_factory)
