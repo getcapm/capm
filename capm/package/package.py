@@ -12,6 +12,8 @@ from capm.utils.Spinner import Spinner
 from capm.utils.cli_utils import fail
 from capm.version import version
 
+package_repository: dict[str, PackageDefinition] = {}
+
 
 def load_packages() -> dict[str, PackageDefinition]:
     result: dict[str, PackageDefinition] = {}

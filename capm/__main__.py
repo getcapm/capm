@@ -9,6 +9,7 @@ from typer import Context
 from typer.core import TyperGroup
 
 import capm.version
+from capm.commands.info import info_command, InfoFormat
 from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
@@ -87,12 +88,12 @@ def create():
 
 
 @cli.command(help="Show information about package")
-def info():
-    print(f"{'PACKAGE':20s} {'VERSION':8s}")
-    packages = sorted(package_repository.keys())
-    for k in packages:
-        v = package_repository[k]
-        print(f"{k:20s} {str(v.version):8s}")
+def info(package: Annotated[str | None, typer.Argument(help="Package name", show_default=False)] = None,
+         fmt: Annotated[
+             InfoFormat, typer.Option("--format", help="Output format")
+         ] = InfoFormat.text
+         ):
+    info_command(package_repository, fmt, package)
 
 
 @cli.command(name="list", help="List package")
