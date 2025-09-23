@@ -69,7 +69,7 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
 
 
 def _run_image(docker_client, image_name: str, package_definition: PackageDefinition, package_config: PackageConfig,
-               codebase_path: Path = Path('..')) -> tuple[int, str]:
+               codebase_path: Path = Path('.')) -> tuple[int, str]:
     args = package_config.args if package_config.args else package_definition.args
     report_dir = str(run_commands.reports_dir.joinpath(package_config.id))
     command = ''
@@ -94,7 +94,7 @@ def _run_image(docker_client, image_name: str, package_definition: PackageDefini
 
 
 def run_package(package_definition: PackageDefinition, package_config: PackageConfig, show_output: bool,
-                codebase_path: Path = Path('..')) -> int:
+                codebase_path: Path = Path('.')) -> int:
     docker_client = docker.from_env()
     spinner = Spinner('Loading')
     spinner.start()
