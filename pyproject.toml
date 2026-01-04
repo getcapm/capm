@@ -25,7 +25,7 @@ capm = "capm.__main__:main"
 
 [dependency-groups]
 dev = [
-    "poethepoet>=0.36.0",
+    "poethepoet>=0.39.0",
     "pyinstaller>=6.17.0",
     "pytest>=9.0.2",
 ]
