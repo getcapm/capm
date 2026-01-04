@@ -1,6 +1,61 @@
 # CHANGELOG
 
 
+## v0.9.0 (2026-01-04)
+
+### Bug Fixes
+
+- 🐛 Fix build
+  ([`4dd9f1b`](https://github.com/getcapm/capm/commit/4dd9f1bd072a9616d42aefb9b3f429b9a64fd2a7))
+
+- 🐛 Fix path
+  ([`b3b6121`](https://github.com/getcapm/capm/commit/b3b6121b9cce22fa9ffa345b08a758b740c3fb6c))
+
+### Chores
+
+- 🚧 Add tokei
+  ([`92326e8`](https://github.com/getcapm/capm/commit/92326e805d5bb9e2c0a6f561ee9e9ef087f88355))
+
+### Continuous Integration
+
+- 👷 Allow zero version
+  ([`33bb29e`](https://github.com/getcapm/capm/commit/33bb29e5dd0da3869c7fe5dcc74cc4309dfaf9c3))
+
+- 💚 Fix build
+  ([`fcd1c6f`](https://github.com/getcapm/capm/commit/fcd1c6f8022bebf506a7cf73e2ffc8a79a52210e))
+
+- 💚 Fix build
+  ([`ab90fd9`](https://github.com/getcapm/capm/commit/ab90fd950180e89ee9f2f4e5ffabf008c41450c7))
+
+- 💚 Fix issue
+  ([`2aa5719`](https://github.com/getcapm/capm/commit/2aa57197324b5b7014b46352e5242fefca88969a))
+
+### Features
+
+- ✨ 5 new packages
+  ([`f38e876`](https://github.com/getcapm/capm/commit/f38e876bff448abd1912de12d51e166ac7baf9d4))
+
+- ✨ Add ansbile-lint
+  ([`8aa4d43`](https://github.com/getcapm/capm/commit/8aa4d434c255def44b1bffe5d9ea8e91613cfc34))
+
+- ✨ Add ASL validator
+  ([`89aaf9d`](https://github.com/getcapm/capm/commit/89aaf9dc103800b1331872224664c43b34dd1ec2))
+
+- ✨ Add Checkov and jscpd
+  ([`98bfaa6`](https://github.com/getcapm/capm/commit/98bfaa65189241795a7e43e994a946a01dab3cd6))
+
+- ✨ Add info command
+  ([`d82f248`](https://github.com/getcapm/capm/commit/d82f248ad2e75134c868ae5c549eb3afec4a8d2e))
+
+- ✨ info command improvements
+  ([`7d3446c`](https://github.com/getcapm/capm/commit/7d3446c5bcad834bd4def8fd5b5411228bd08fac))
+
+### Performance Improvements
+
+- ⚡️ Optimize build and run
+  ([`ff5d9b4`](https://github.com/getcapm/capm/commit/ff5d9b45a9852707eba9175fc912248c18e313e5))
+
+
 ## v0.8.0 (2025-08-12)
 
 ### Bug Fixes
