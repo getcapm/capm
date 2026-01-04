@@ -12,19 +12,19 @@ jobs:
       version: ${{ steps.release.outputs.version }}
     steps:
     - name: Checkout sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@v7
 
     - name: Install dependencies
       run: uv sync --locked --dev
 
     - name: Python Semantic Release
       id: release
-      uses: relekang/python-semantic-release@v9.21.0
+      uses: relekang/python-semantic-release@v10.5.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         strict: true
@@ -90,7 +90,7 @@ jobs:
 
     steps:
     - name: Checkout sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: main
 
@@ -131,28 +131,28 @@ jobs:
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: |
-              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions -n capm -F capm/__main__.py
+              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
               mv dist/capm dist/capm-macos
             OUT_FILE_NAME: dist/capm-macos
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: |
-              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions -n capm --onefile -c capm/__main__.py
+              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm --onefile -c capm/__main__.py
             OUT_FILE_NAME: dist/capm.exe
           - os: ubuntu-22.04
             TARGET: linux
             CMD_BUILD: |
-              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions -n capm -F capm/__main__.py
+              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
               mv dist/capm dist/capm-linux
             OUT_FILE_NAME: dist/capm-linux
     steps:
     - name: Checkout sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: main
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@v7
 
     - name: Install dependencies
       run: uv sync --locked --dev
@@ -161,7 +161,7 @@ jobs:
       run: ${{matrix.CMD_BUILD}}
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ format('v{0}', needs.release.outputs.version) }}
         files: |
