@@ -9,7 +9,7 @@ from capm.config import run_commands
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.utils.Spinner import Spinner
-from capm.utils.cli_utils import fail
+from capm.utils.cli_utils import fail, info
 from capm.version import version
 
 package_repository: dict[str, PackageDefinition] = {}
@@ -44,6 +44,7 @@ def _image_exists(docker_client, image_name: str) -> bool:
 def _build_image(docker_client, package_definition: PackageDefinition, package_config: PackageConfig):
     base_image = package_definition.image
     if not _image_exists(docker_client, base_image):
+        info(f'Base image \'{base_image}\' not found locally, pulling from registry...')
         docker_client.images.pull(base_image)
     if package_definition.install_command:
         package_version = package_config.version if package_config.version else package_definition.version
@@ -52,12 +53,16 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
         install_command = ' && '.join(install_command.strip().split('\n'))
         command = f'/bin/sh -c \'({install_command}) >/dev/null 2>&1\''
         try:
+            info(f'Building image for package \'{package_config.id}\' with command: {install_command}')
             container = docker_client.containers.run(base_image, tty=True, remove=True, detach=True)
             exec_result = container.exec_run(command)
             if exec_result.exit_code != 0:
                 return exec_result.exit_code, exec_result.output.decode('utf-8')
             output = container.logs()
+            info(f'Image for package \'{package_config.id}\' built successfully')
+            info(f'Committing image with tag: capm-{package_config.id}:{version}')
             container.commit(f'capm-{package_config.id}', version)
+            info(f'Image for package \'{package_config.id}\' committed successfully')
             container.stop()
             return 0, output.decode('utf-8')
         except DockerException as e:

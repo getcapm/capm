@@ -34,3 +34,9 @@ jobs:
 
       - name: Build binary
         run: uv run poe bundle
+
+      - name: Test binary
+        run: dist/capm --version
+
+      - name: Run single package
+        run: dist/capm run codelimit
