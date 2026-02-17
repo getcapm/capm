@@ -61,6 +61,11 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
             info(f'Image for package \'{package_config.id}\' committed successfully')
             container.stop()
             info('Container stopped successfully')
+            info(type(output))
+            info(output)
+            info(type(output.decode('utf-8')))
+            info(output.decode('utf-8'))
+            info('here')
             return 0, output.decode('utf-8')
         except DockerException as e:
             raise e
