@@ -58,19 +58,16 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
                 return exec_result.exit_code, exec_result.output.decode('utf-8')
             output = container.logs()
             container.commit(f'capm-{package_config.id}', version)
-            info(f'Image for package \'{package_config.id}\' committed successfully')
             container.stop()
-            info('Container stopped successfully')
-            info(type(output))
-            info(output)
-            info(type(output.decode('utf-8')))
-            info(output.decode('utf-8'))
             info('here')
             return 0, output.decode('utf-8')
         except DockerException as e:
             raise e
         finally:
-            docker_client.containers.prune()
+            all_containers = docker_client.containers.list(all=True)
+            for c in all_containers:
+                info(f"Container {c.id} ({c.name})")
+            # docker_client.containers.prune()
     else:
         return None
 
