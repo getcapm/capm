@@ -1,5 +1,6 @@
 from os import path, listdir
 from pathlib import Path
+from time import sleep
 
 import docker
 import yaml
@@ -59,7 +60,6 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
             output = container.logs()
             container.commit(f'capm-{package_config.id}', version)
             container.stop()
-            info('here')
             return 0, output.decode('utf-8')
         except DockerException as e:
             raise e
@@ -67,7 +67,8 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
             all_containers = docker_client.containers.list(all=True)
             for c in all_containers:
                 info(f"Container {c.id} ({c.name})")
-            # docker_client.containers.prune()
+            sleep(5)
+            docker_client.containers.prune()
     else:
         return None
 
