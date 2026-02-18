@@ -4,13 +4,13 @@ from time import sleep
 
 import docker
 import yaml
-from docker.errors import ContainerError, DockerException
+from docker.errors import ContainerError, DockerException, APIError
 
 from capm.config import run_commands
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
 from capm.utils.Spinner import Spinner
-from capm.utils.cli_utils import fail, info
+from capm.utils.cli_utils import fail
 from capm.version import version
 
 package_repository: dict[str, PackageDefinition] = {}
@@ -64,11 +64,14 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
         except DockerException as e:
             raise e
         finally:
-            all_containers = docker_client.containers.list(all=True)
-            for c in all_containers:
-                info(f"Container {c.id} ({c.name})")
-            sleep(5)
-            docker_client.containers.prune()
+            try:
+                docker_client.containers.prune()
+            except APIError as e:
+                if e.response.status_code == 404:
+                    sleep(5)  # Sometimes the first try fails, for example in GitHub Actions
+                    docker_client.containers.prune()
+                else:
+                    raise e
     else:
         return None
 
