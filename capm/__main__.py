@@ -44,7 +44,7 @@ def add(package: Annotated[str, typer.Argument(help="Package name")]):
     succeed(f'Package \'{package}\' added successfully.')
 
 
-@cli.command(help="Run all configured package")
+@cli.command(help="Run all configured packages")
 def check(show_output: Annotated[bool | None, typer.Option(help="Show output of package", show_default=False)] = None):
     if not os.path.exists(CONFIG_FILE):
         print(f"{CONFIG_FILE} does not exist.")
@@ -96,11 +96,11 @@ def info(package: Annotated[str | None, typer.Argument(help="Package name", show
     info_command(package_repository, fmt, package)
 
 
-@cli.command(name="list", help="List package")
+@cli.command(name="list", help="List configured packages")
 def list_packages():
     config = load_config_from_file(CONFIG_FILE)
     if not config.packages:
-        print("No package found.")
+        print("No packages found.")
         return
     for package in config.packages:
         print(f"{package.id}")
