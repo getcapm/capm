@@ -1,3 +1,4 @@
+from capm.output.OutputFormat import OutputFormat
 from capm.output.OutputStream import OutputStream
 
 
@@ -11,10 +12,15 @@ class Markdown(OutputStream):
     def package_run_succeed(self, package_id: str) -> None:
         print(f'## :white_check_mark: {package_id}')
 
-    def command_output(self, command_output: str) -> None:
+    def command_output(self, command_output: str, output_format: OutputFormat) -> None:
         if self.show_output:
-            print(f'```\n{command_output}\n```\n')
+            if output_format == 'markdown':
+                print(command_output)
+            else:
+                print(f'```\n{command_output}\n```\n')
 
-    def command_error(self, command_error: str) -> None:
-        if self.show_output:
-            print(f"```\n{command_error}\n```\n")
+    def command_error(self, command_error: str, output_format: OutputFormat) -> None:
+        if output_format == 'markdown':
+            print(command_error)
+        else:
+            print(f'```\n{command_error}\n```\n')

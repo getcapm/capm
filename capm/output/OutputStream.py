@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from capm.output.OutputFormat import OutputFormat
+
 
 class OutputStream(ABC):
     def start_status(self, message: str) -> None:
@@ -17,9 +19,9 @@ class OutputStream(ABC):
         pass
 
     @abstractmethod
-    def command_output(self, command_output: str) -> None:
+    def command_output(self, command_output: str, output_format: OutputFormat) -> None:
         pass
 
     @abstractmethod
-    def command_error(self, command_error: str) -> None:
+    def command_error(self, command_error: str, output_format: OutputFormat) -> None:
         pass

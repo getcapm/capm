@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from capm.output.OutputFormat import OutputFormat
+
 
 @dataclass
 class PackageConfig:
@@ -8,3 +10,4 @@ class PackageConfig:
     args: str | None = None
     extra_args: str | None = None
     workspace_mode: str | None = None
+    output_format: OutputFormat | None = None
