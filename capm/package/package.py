@@ -9,7 +9,7 @@ from docker.errors import ContainerError, DockerException, APIError
 from capm.config import run_commands
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
-from capm.utils.Spinner import Spinner
+from capm.output.OutputStream import OutputStream
 from capm.utils.cli_utils import fail
 from capm.version import version
 
@@ -42,7 +42,8 @@ def _image_exists(docker_client, image_name: str) -> bool:
         return False
 
 
-def _build_image(docker_client, package_definition: PackageDefinition, package_config: PackageConfig):
+def _build_image(docker_client, package_definition: PackageDefinition, package_config: PackageConfig) \
+        -> tuple[int, str]:
     base_image = package_definition.image
     if not _image_exists(docker_client, base_image):
         docker_client.images.pull(base_image)
@@ -73,7 +74,7 @@ def _build_image(docker_client, package_definition: PackageDefinition, package_c
                 else:
                     raise e
     else:
-        return None
+        return 0, ''
 
 
 def _run_image(docker_client, image_name: str, package_definition: PackageDefinition, package_config: PackageConfig,
@@ -101,41 +102,39 @@ def _run_image(docker_client, image_name: str, package_definition: PackageDefini
     return exit_code, output.decode('utf-8')
 
 
-def run_package(package_definition: PackageDefinition, package_config: PackageConfig, show_output: bool,
+def run_package(package_definition: PackageDefinition, package_config: PackageConfig, output_stream: OutputStream,
                 codebase_path: Path = Path('.')) -> int:
     docker_client = docker.from_env()
-    spinner = Spinner('Loading')
-    spinner.start()
+    output_stream.start_status('Loading')
     if package_definition.install_command:
         image_name = f'capm-{package_config.id}:{version}'
         if not _image_exists(docker_client, image_name):
-            spinner.text = f'[{package_config.id}] Building image: {image_name}'
+            output_stream.update_status_info(f'[{package_config.id}] Building image: {image_name}')
             try:
-                exit_code, output = _build_image(docker_client, package_definition, package_config)
+                exit_code, logs = _build_image(docker_client, package_definition, package_config)
                 if exit_code != 0:
-                    spinner.fail(f"[{package_config.id}] Error building image, exit code: {exit_code}")
-                    print(output)
+                    output_stream.package_run_fail(package_config.id, f'Error building image, exit code: {exit_code}')
+                    output_stream.command_error(logs)
                     return exit_code
             except ContainerError as e:
                 exit_code = int(e.exit_status)
-                spinner.fail(f"[{package_config.id}] Error building image, exit code: {exit_code}")
-                print(e.container.logs().decode('utf-8'))
+                output_stream.package_run_fail(package_config.id, f'Error building image, exit code: {exit_code}')
+                output_stream.command_error(e.container.logs().decode('utf-8'))
                 return exit_code
             except DockerException as e:
-                spinner.fail(f"[{package_config.id}] Error building image, reason: {str(e)}")
+                output_stream.package_run_fail(package_config.id, f'Error building image, reason: {str(e)}')
                 return 1
     else:
         image_name = package_definition.image
         if not _image_exists(docker_client, image_name):
-            spinner.text = f'[{package_config.id}] Pulling image: {image_name}'
+            output_stream.update_status_info(f'[{package_config.id}] Pulling image: {image_name}')
             docker_client.images.pull(image_name)
-    spinner.text = f'[{package_config.id}] Running image: ({image_name})'
-    exit_code, output = _run_image(docker_client, image_name, package_definition, package_config, codebase_path)
+    output_stream.update_status_info(f'[{package_config.id}] Running image: ({image_name})')
+    exit_code, logs = _run_image(docker_client, image_name, package_definition, package_config, codebase_path)
     if exit_code == 0:
-        spinner.succeed(f'[{package_config.id}] Package executed successfully')
-        if show_output:
-            print(output)
+        output_stream.package_run_succeed(package_config.id)
+        output_stream.command_output(logs)
     else:
-        spinner.fail(f"[{package_config.id}] Error running package, exit code: {exit_code}")
-        print(output)
+        output_stream.package_run_fail(package_config.id, f'Error running package, exit code: {exit_code}')
+        output_stream.command_output(logs)
     return exit_code

@@ -6,12 +6,11 @@ from capm.utils.cli_utils import info, succeed, fail
 
 
 class Spinner:
-    def __init__(self, text: str):
+    def __init__(self):
         if sys.stdout.isatty():
-            self._spinner = Halo(text=text, spinner='dots')
+            self._spinner = Halo(text='', spinner='dots')
         else:
             self._spinner = None
-            info(text)
 
     def start(self):
         if self._spinner:

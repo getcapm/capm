@@ -13,6 +13,8 @@ from capm.commands.info import info_command, InfoFormat
 from capm.config import load_config_from_file, save_config_to_file
 from capm.entities.PackageConfig import PackageConfig
 from capm.entities.PackageDefinition import PackageDefinition
+from capm.output.Markdown import Markdown
+from capm.output.Console import Console
 from capm.package.package import run_package, load_packages
 from capm.utils.cli_utils import fail, succeed, console, read_input
 from capm.utils.utils import data_class_to_dict
@@ -55,8 +57,9 @@ def check(show_output: Annotated[bool | None, typer.Option(help="Show output of 
             fail(f"Package '{package_config.id}' does not exist.")
             sys.exit(1)
         package_definition = package_repository[package_config.id]
-        exit_code = run_package(package_definition, package_config,
-                                show_output if show_output is not None else False)
+        # output_stream = Console(show_output if show_output is not None else False)
+        output_stream = Markdown(show_output if show_output is not None else False)
+        exit_code = run_package(package_definition, package_config, output_stream)
         if exit_code != 0:
             sys.exit(exit_code)
 
@@ -152,7 +155,8 @@ def main():
             sys.exit(1)
         package_definition = package_repository[package]
         args = ' '.join(sys.argv[3:])
-        exit_code = run_package(package_definition, PackageConfig(package, args=args), True)
+        output_stream = Console(True)
+        exit_code = run_package(package_definition, PackageConfig(package, args=args), output_stream)
         if exit_code != 0:
             sys.exit(exit_code)
     else:
