@@ -2,7 +2,7 @@ from capm.output.OutputFormat import OutputFormat
 from capm.output.OutputStream import OutputStream
 
 
-class Markdown(OutputStream):
+class MarkdownStream(OutputStream):
     def __init__(self, show_output: bool = False):
         self.show_output = show_output
 
@@ -14,13 +14,13 @@ class Markdown(OutputStream):
 
     def command_output(self, command_output: str, output_format: OutputFormat) -> None:
         if self.show_output:
-            if output_format == 'markdown':
+            if output_format == OutputFormat.markdown:
                 print(command_output)
             else:
                 print(f'```\n{command_output}\n```\n')
 
     def command_error(self, command_error: str, output_format: OutputFormat) -> None:
-        if output_format == 'markdown':
+        if output_format == OutputFormat.markdown:
             print(command_error)
         else:
             print(f'```\n{command_error}\n```\n')

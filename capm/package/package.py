@@ -91,6 +91,7 @@ def _run_image(docker_client, image_name: str, package_run_config: PackageRunCon
     volumes = {str(codebase_path.resolve()): {'bind': str(run_commands.workspace_dir), 'mode': mode}}
     try:
         output = docker_client.containers.run(image_name, command, volumes=volumes, tty=True, remove=False,
+                                              log_config={'type': 'json-file'},
                                               working_dir=str(run_commands.workspace_dir))
         exit_code = 0
     except ContainerError as e:
