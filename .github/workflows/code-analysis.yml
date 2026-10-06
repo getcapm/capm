@@ -16,4 +16,4 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Run CAPM
-        uses: getcapm/capm-action@v1.0.1
+        uses: getcapm/capm-action@v1
