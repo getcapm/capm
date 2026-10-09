@@ -134,7 +134,7 @@ jobs:
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
               mv dist/capm dist/capm-macos-arm
             OUT_FILE_NAME: dist/capm-macos-arm
-          - os: macos-latest-intel
+          - os: macos-26-intel
             TARGET: macos
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
@@ -145,7 +145,7 @@ jobs:
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm --onefile -c capm/__main__.py
             OUT_FILE_NAME: dist/capm.exe
-          - os: ubuntu-latest-arm
+          - os: ubuntu-26.04-arm
             TARGET: linux-arm64
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
