@@ -132,19 +132,31 @@ jobs:
             TARGET: macos
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
-              mv dist/capm dist/capm-macos
-            OUT_FILE_NAME: dist/capm-macos
+              mv dist/capm dist/capm-macos-arm
+            OUT_FILE_NAME: dist/capm-macos-arm
+          - os: macos-latest-intel
+            TARGET: macos
+            CMD_BUILD: |
+              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
+              mv dist/capm dist/capm-macos-x86_64
+            OUT_FILE_NAME: dist/capm-macos-x86_64
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm --onefile -c capm/__main__.py
             OUT_FILE_NAME: dist/capm.exe
-          - os: ubuntu-22.04
-            TARGET: linux
+          - os: ubuntu-latest-arm
+            TARGET: linux-arm64
             CMD_BUILD: |
               uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
-              mv dist/capm dist/capm-linux
-            OUT_FILE_NAME: dist/capm-linux
+              mv dist/capm dist/capm-linux-arm64
+            OUT_FILE_NAME: dist/capm-linux-arm64
+          - os: ubuntu-latest
+            TARGET: linux-x86_64
+            CMD_BUILD: |
+              uv run pyinstaller --add-data capm/package/definitions:capm/package/definitions --copy-metadata readchar -n capm -F capm/__main__.py
+              mv dist/capm dist/capm-linux-x86_64
+            OUT_FILE_NAME: dist/capm-linux-x86_64
     steps:
     - name: Checkout sources
       uses: actions/checkout@v7
