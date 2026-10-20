@@ -3,6 +3,7 @@ version: 6.0.1
 install_command: 'pip install radon=={version}'
 entrypoint: radon
 args: 'cc {workspace}'
-repository: https://github.com/rubik/radon
+website: https://github.com/rubik/radon
 about: Various code metrics for Python code
 type: analyzer
+technology: python

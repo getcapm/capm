@@ -5,6 +5,7 @@ install_command: |
   apk add git
 entrypoint: cloc
 args: '{workspace}'
-repository: https://github.com/aldanial/cloc
+website: https://github.com/aldanial/cloc
 about: Counts blank lines, comment lines, and physical lines of source code in many programming languages.
 type: analyzer
+technology: polyglot

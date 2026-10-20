@@ -5,6 +5,7 @@ install_command: |
   go install github.com/boyter/scc/v4@v{version}
 entrypoint: /root/go/bin/scc
 args: '{workspace}'
-repository: https://github.com/boyter/scc
+website: https://github.com/boyter/scc
 about: SCC is a very fast and accurate code counter that supports over 100 languages.
 type: analyzer
+technology: polyglot

@@ -46,4 +46,4 @@ def print_repository_markdown(package_repository: dict[str, PackageDefinition]):
             technology_cell = ', '.join(technologies)
         else:
             technology_cell = '3+'
-        print(f"{k} | {str(v.version)} | {v.type} | {technology_cell} |")
+        print(f"[{k}]({v.website}) | {str(v.version)} | {v.type} | {technology_cell} |")

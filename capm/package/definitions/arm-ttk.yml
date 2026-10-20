@@ -9,7 +9,7 @@ install_command: |
   unzip arm-ttk.zip
   cd arm-ttk/arm-ttk
   chmod a+rx Test-AzTemplate.sh
-repository: https://github.com/Azure/arm-ttk
+website: https://github.com/Azure/arm-ttk
 technology: ARM
 type: linter
 version: '20250401'

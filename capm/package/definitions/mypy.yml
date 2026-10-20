@@ -3,6 +3,7 @@ version: 1.17.1
 install_command: 'pip install mypy=={version}'
 entrypoint: mypy
 args: '--install-types --non-interactive --ignore-missing-imports {workspace}'
-repository: https://github.com/python/mypy
+website: https://github.com/python/mypy
 about: Optional static typing for Python
 type: linter
+technology: python

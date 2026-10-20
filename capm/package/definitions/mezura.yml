@@ -6,6 +6,7 @@ install_command: |
   cargo install mezura --version {version}
 entrypoint: /root/.cargo/bin/mezura
 args: '{workspace}'
-repository: https://github.com/subamanis/mezura
+website: https://github.com/subamanis/mezura
 about: Counts the lines of a codebase quickly and accurately.
 type: analyzer
+technology: polyglot
