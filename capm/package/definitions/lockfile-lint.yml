@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 5.1.0
+install_command: 'npm install -g lockfile-lint@{version}'
+entrypoint: lockfile-lint
+args: '--path {workspace}/package-lock.json --validate-https'
+about: Lints an npm or yarn lockfile to detect security issues.
+website: https://github.com/lirantal/lockfile-lint
+type: linter
+technology: nodejs
+workspace_mode: ro

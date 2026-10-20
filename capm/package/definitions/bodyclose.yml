@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.0.0-20260923065923-98ded9ab4ef2
+install_command: |
+  apk add go
+  go install github.com/timakin/bodyclose@v{version}
+entrypoint: /root/go/bin/bodyclose
+args: '{workspace}/...'
+about: Checks whether HTTP response bodies are closed.
+website: https://github.com/timakin/bodyclose
+type: linter
+technology: go
+workspace_mode: ro

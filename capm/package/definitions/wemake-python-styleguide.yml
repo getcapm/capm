@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.8.1
+install_command: 'pip install wemake-python-styleguide=={version}'
+entrypoint: flake8
+args: '--select=WPS {workspace}'
+about: The strictest and most opinionated Python linter ever.
+website: https://wemake-python-styleguide.rtfd.io/
+type: linter
+technology: python
+workspace_mode: ro

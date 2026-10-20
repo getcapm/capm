@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 0.9.3
+install_command: |
+  apk add git
+  gem install bundler-audit -v {version}
+entrypoint: bundle-audit
+args: 'check {workspace}'
+about: Audits Gemfile.lock for gems with security vulnerabilities reported in the Ruby Advisory Database.
+website: https://github.com/rubysec/bundler-audit
+type: linter
+technology: ruby
+workspace_mode: ro

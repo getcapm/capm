@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 12.0.1
+install_command: 'npm install -g remark-cli@{version} remark-preset-lint-recommended'
+entrypoint: remark
+args: '--use remark-preset-lint-recommended --frail --quiet --no-stdout {workspace}'
+about: Pluggable Markdown code style linter written in JavaScript.
+website: https://remark.js.org
+type: linter
+technology: markdown
+workspace_mode: ro

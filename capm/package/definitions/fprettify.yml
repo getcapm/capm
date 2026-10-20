@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.3.7
+install_command: 'pip install fprettify=={version}'
+entrypoint: fprettify
+args: '--diff --recursive {workspace}'
+about: Auto-formatter for modern Fortran source code, written in Python.
+website: https://github.com/pseewald/fprettify
+type: formatter
+technology: fortran
+workspace_mode: ro

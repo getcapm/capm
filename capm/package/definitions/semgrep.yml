@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.182.0
+install_command: 'pip install semgrep=={version}'
+entrypoint: semgrep
+args: 'scan --config auto {workspace}'
+about: A fast, open-source static analysis tool for finding bugs and enforcing code standards.
+website: https://semgrep.dev
+type: linter
+technology: polyglot
+workspace_mode: ro

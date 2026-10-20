@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 1.89.0
+install_command: 'npm install -g oxlint@{version}'
+entrypoint: oxlint
+args: '{workspace}'
+about: A high-performance JavaScript and TypeScript linter from the Oxidation Compiler project.
+website: https://oxc.rs
+type: linter
+technology: javascript, typescript
+workspace_mode: ro

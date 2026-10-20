@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.2.0
+install_command: |
+  apk add go
+  go install github.com/gordonklaus/ineffassign@v{version}
+entrypoint: /root/go/bin/ineffassign
+args: '{workspace}/...'
+about: Detects ineffectual assignments in Go code.
+website: https://github.com/gordonklaus/ineffassign
+type: linter
+technology: go
+workspace_mode: ro

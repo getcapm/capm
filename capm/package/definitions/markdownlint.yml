@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 0.49.1
+install_command: 'npm install -g markdownlint-cli@{version}'
+entrypoint: markdownlint
+args: '{workspace}'
+about: Node.js based style checker and lint tool for Markdown/CommonMark files.
+website: https://github.com/DavidAnson/markdownlint
+type: linter
+technology: markdown
+workspace_mode: ro

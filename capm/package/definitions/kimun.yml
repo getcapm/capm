@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.39.0
+install_command: |
+  apk add cargo
+  apk add openssl-dev pkgconf
+  cargo install kimun --version {version}
+entrypoint: /root/.cargo/bin/km
+args: 'score {workspace}'
+about: Code health metrics that grade a project on complexity, duplication, indentation, Halstead effort and file size.
+website: https://kimun.tools/en/
+type: analyzer
+technology: polyglot

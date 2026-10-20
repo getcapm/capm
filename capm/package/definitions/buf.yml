@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 1.74.0
+install_command: 'npm install -g @bufbuild/buf@{version}'
+entrypoint: buf
+args: 'lint {workspace}'
+about: A CLI linter that enforces good API design choices and structure for Protobuf files.
+website: https://buf.build
+type: linter
+technology: protobuf
+workspace_mode: ro

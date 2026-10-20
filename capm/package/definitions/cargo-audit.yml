@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.22.2
+install_command: |
+  apk add cargo
+  cargo install cargo-audit --version {version}
+entrypoint: /root/.cargo/bin/cargo-audit
+args: 'audit --file {workspace}/Cargo.lock'
+about: Audits Cargo.lock for crates with security vulnerabilities reported to the RustSec Advisory Database.
+website: https://rustsec.org
+type: linter
+technology: rust
+workspace_mode: ro

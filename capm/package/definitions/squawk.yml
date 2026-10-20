@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.70.0
+install_command: 'pip install squawk-cli=={version}'
+entrypoint: squawk
+args: '{workspace}/**/*.sql'
+about: A linter for Postgres migrations and SQL that flags unsafe schema changes.
+website: https://squawkhq.com
+type: linter
+technology: sql
+workspace_mode: ro

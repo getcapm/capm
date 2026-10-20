@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 11.17.0
+install_command: 'npm install -g html-validate@{version}'
+entrypoint: html-validate
+args: '{workspace}'
+about: Offline HTML5 validator and linter.
+website: https://html-validate.org/
+type: linter
+technology: html, vue
+workspace_mode: ro

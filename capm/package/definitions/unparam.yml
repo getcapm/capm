@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.0.0-20261011093844-7a2c2c0b7aa6
+install_command: |
+  apk add go
+  go install mvdan.cc/unparam@v{version}
+entrypoint: /root/go/bin/unparam
+args: '{workspace}/...'
+about: Finds unused function parameters in Go code.
+website: https://github.com/mvdan/unparam
+type: linter
+technology: go
+workspace_mode: ro

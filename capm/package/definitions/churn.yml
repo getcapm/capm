@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 1.0.8
+install_command: |
+  apk add build-base
+  apk add git
+  gem install churn -v {version}
+entrypoint: churn
+args: ''
+about: Reports how often files, classes and methods change over the history of a project.
+website: https://github.com/danmayer/churn
+type: analyzer
+technology: ruby

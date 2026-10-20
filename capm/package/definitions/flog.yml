@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 4.9.4
+install_command: |
+  apk add build-base
+  gem install flog -v {version}
+entrypoint: flog
+args: '{workspace}'
+about: Reports the most tortured Ruby code in an easy to read pain report.
+website: https://ruby.sadi.st/Flog.html
+type: complexity
+technology: ruby
+workspace_mode: ro

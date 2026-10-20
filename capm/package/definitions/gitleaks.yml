@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 8.30.1
+install_command: |
+  apk add go
+  go install github.com/zricethezav/gitleaks/v8@v{version}
+entrypoint: /root/go/bin/gitleaks
+args: 'dir {workspace}'
+about: Detects hardcoded secrets like passwords, API keys and tokens in code.
+website: https://gitleaks.io
+type: analyzer
+technology: polyglot
+workspace_mode: ro

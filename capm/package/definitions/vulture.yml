@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: '2.16'
+install_command: 'pip install vulture=={version}'
+entrypoint: vulture
+args: '{workspace}'
+about: Find unused classes, functions and variables in Python code.
+website: https://github.com/jendrikseipp/vulture
+type: linter
+technology: python
+workspace_mode: ro

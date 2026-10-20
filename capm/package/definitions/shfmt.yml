@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 3.14.1
+install_command: |
+  apk add go
+  go install mvdan.cc/sh/v3/cmd/shfmt@v{version}
+entrypoint: /root/go/bin/shfmt
+args: '--diff {workspace}'
+about: A shell parser, formatter, and interpreter with bash support; includes shfmt.
+website: https://github.com/mvdan/sh
+type: formatter
+technology: shell
+workspace_mode: ro

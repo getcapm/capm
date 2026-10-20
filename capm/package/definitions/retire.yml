@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 6.1.0
+install_command: 'npm install -g retire@{version}'
+entrypoint: retire
+args: '--path {workspace}'
+about: Scanner detecting the use of JavaScript libraries with known vulnerabilities.
+website: https://retirejs.github.io/retire.js
+type: analyzer
+technology: javascript
+workspace_mode: ro

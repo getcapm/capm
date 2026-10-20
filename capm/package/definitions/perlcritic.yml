@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 1.156-r0
+install_command: 'apk add perl-critic={version}'
+entrypoint: perlcritic
+args: '{workspace}'
+about: Critique Perl source code for best-practices.
+website: https://metacpan.org/dist/Perl-Critic
+type: linter
+technology: perl
+workspace_mode: ro

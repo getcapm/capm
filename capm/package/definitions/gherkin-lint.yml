@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 4.2.4
+install_command: 'npm install -g gherkin-lint@{version}'
+entrypoint: gherkin-lint
+args: '.'
+about: A linter for the Gherkin syntax, written in JavaScript.
+website: https://github.com/vsiakka/gherkin-lint
+type: linter
+technology: gherkin
+workspace_mode: ro

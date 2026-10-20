@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 7.4.1
+install_command: 'pip install flake8=={version}'
+entrypoint: flake8
+args: '{workspace}'
+about: A wrapper around pyflakes, pycodestyle and mccabe.
+website: https://github.com/PyCQA/flake8
+type: linter
+technology: python
+workspace_mode: ro

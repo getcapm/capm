@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 0.9.0
+install_command: |
+  apk add build-base
+  gem install erb_lint -v {version}
+entrypoint: erb_lint
+args: '--lint-all'
+about: Lints ERB and HTML files.
+website: https://github.com/Shopify/erb-lint
+type: linter
+technology: erb, html, ruby
+workspace_mode: ro

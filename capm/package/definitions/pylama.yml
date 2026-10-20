@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 8.4.1
+install_command: "pip install pylama=={version} 'setuptools<81'"
+entrypoint: pylama
+args: '{workspace}'
+about: Code audit tool for Python that wraps pycodestyle, pydocstyle, pyflakes, mccabe, pylint and more.
+website: https://klen.github.io/pylama/
+type: linter
+technology: python, javascript
+workspace_mode: ro

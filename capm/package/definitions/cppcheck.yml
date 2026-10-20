@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 2.14.2-r1
+install_command: 'apk add cppcheck={version}'
+entrypoint: cppcheck
+args: '{workspace}'
+about: Static analysis of C/C++ code.
+website: https://cppcheck.sourceforge.io
+type: linter
+technology: c, cpp
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.121.0
+install_command: |
+  apk add go
+  go install github.com/anchore/grype/cmd/grype@v{version}
+entrypoint: /root/go/bin/grype
+args: 'dir:{workspace}'
+about: Vulnerability scanner for container images and filesystems.
+website: https://github.com/anchore/grype
+type: analyzer
+technology: polyglot
+workspace_mode: ro

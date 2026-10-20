@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 1.9.2
+install_command: 'npm install -g htmlhint@{version}'
+entrypoint: htmlhint
+args: '{workspace}'
+about: A static code analysis tool for HTML.
+website: https://htmlhint.com
+type: linter
+technology: html
+workspace_mode: ro

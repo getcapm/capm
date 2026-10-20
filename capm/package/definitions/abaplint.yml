@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 2.120.83
+install_command: 'npm install -g @abaplint/cli@{version}'
+entrypoint: abaplint
+args: ''
+about: Linter for ABAP, written in TypeScript.
+website: https://abaplint.org
+type: linter
+technology: abap
+workspace_mode: ro

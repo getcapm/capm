@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.0.0-20261020133855-975dd2843474
+install_command: |
+  apk add go
+  go install github.com/mdempsky/unconvert@v{version}
+entrypoint: /root/go/bin/unconvert
+args: '{workspace}/...'
+about: Detects redundant type conversions in Go code.
+website: https://github.com/mdempsky/unconvert
+type: linter
+technology: go
+workspace_mode: ro

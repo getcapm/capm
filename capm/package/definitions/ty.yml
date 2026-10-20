@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.0.90
+install_command: 'pip install ty=={version}'
+entrypoint: ty
+args: 'check {workspace}'
+about: An extremely fast Python type checker written in Rust.
+website: https://docs.astral.sh/ty/
+type: linter
+technology: python
+workspace_mode: ro

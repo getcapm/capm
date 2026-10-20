@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 0.37.0
+install_command: |
+  apk add build-base
+  gem install slim_lint -v {version}
+entrypoint: slim-lint
+args: '{workspace}'
+about: A tool to help keep Slim templates clean and readable.
+website: https://github.com/sds/slim-lint
+type: linter
+technology: slim, ruby
+workspace_mode: ro

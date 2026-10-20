@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.0.1
+install_command: 'pip install njsscan=={version}'
+entrypoint: njsscan
+args: '{workspace}'
+about: A static application security testing tool that finds insecure code patterns in Node.js applications.
+website: https://github.com/ajinabraham/njsscan
+type: linter
+technology: nodejs
+workspace_mode: ro

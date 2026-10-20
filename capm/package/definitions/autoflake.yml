@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.4.0
+install_command: 'pip install autoflake=={version}'
+entrypoint: autoflake
+args: '--check -r {workspace}'
+about: Removes unused imports and unused variables from Python code.
+website: https://github.com/PyCQA/autoflake
+type: linter
+technology: python
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.2.1
+install_command: 'pip install fixit=={version}'
+entrypoint: fixit
+args: 'lint {workspace}'
+about: A framework for creating lint rules and corresponding auto-fixes for Python source code.
+website: https://github.com/Instagram/Fixit
+type: linter
+technology: python
+workspace_mode: ro

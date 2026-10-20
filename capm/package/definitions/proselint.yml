@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.16.0
+install_command: 'pip install proselint=={version}'
+entrypoint: proselint
+args: 'check {workspace}'
+about: A linter for English prose.
+website: https://github.com/amperser/proselint
+type: linter
+technology: writing
+workspace_mode: ro

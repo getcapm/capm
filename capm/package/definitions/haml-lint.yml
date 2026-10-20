@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 0.78.0
+install_command: |
+  apk add build-base
+  gem install haml_lint -v {version}
+entrypoint: haml-lint
+args: '{workspace}'
+about: Tool for writing clean and consistent HAML.
+website: https://github.com/sds/haml-lint
+type: linter
+technology: haml, ruby
+workspace_mode: ro

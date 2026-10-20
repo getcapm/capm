@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: '2.11'
+install_command: |
+  apk add build-base
+  gem install rubrowser -v {version}
+entrypoint: rubrowser
+args: '--json {workspace}'
+about: Generates an interactive dependency graph of Ruby classes and modules.
+website: https://github.com/blazeeboy/rubrowser
+type: analyzer
+technology: ruby
+workspace_mode: ro

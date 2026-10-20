@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 2.13.6
+install_command: 'npm install -g jshint@{version}'
+entrypoint: jshint
+args: '{workspace}'
+about: Detects errors and potential problems in JavaScript code and enforces coding conventions.
+website: https://jshint.com/about
+type: linter
+technology: javascript
+workspace_mode: ro

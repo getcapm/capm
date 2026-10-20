@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 3.3.0
+install_command: 'npm install -g rev-dep@{version}'
+entrypoint: rev-dep
+args: 'circular'
+about: Dependency analysis toolkit for JavaScript and TypeScript projects.
+website: https://github.com/jayu/rev-dep
+type: analyzer
+technology: typescript, javascript, jsx
+workspace_mode: ro

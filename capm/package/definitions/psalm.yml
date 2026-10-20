@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 6.20.1
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require vimeo/psalm:{version}
+entrypoint: /opt/composer/vendor/bin/psalm
+args: '--no-cache --no-progress'
+about: Static analysis tool for finding type errors in PHP applications.
+website: https://psalm.dev
+type: linter
+technology: php
+workspace_mode: ro

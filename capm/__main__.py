@@ -75,14 +75,13 @@ def create():
     install_command = read_input('Install command (optional)')
     entrypoint = read_input('Entrypoint (optional)')
     args = read_input('Arguments', default='')
-    repository = read_input('Repository (optional)')
     about = read_input('About (optional)')
     website = read_input('Website (optional)')
     technology = read_input('Technology (optional)')
     package_type = read_input('Type', ['linter', 'formatter', 'analyzer', 'duplication', 'complexity', 'other'])
     package_definition = PackageDefinition(image=image, version=version, args=args, type=package_type,
                                            install_command=install_command,
-                                           entrypoint=entrypoint, repository=repository, about=about, website=website,
+                                           entrypoint=entrypoint, about=about, website=website,
                                            technology=technology)
     print(yaml.dump(data_class_to_dict(package_definition)))
     package_id = read_input('Package ID')

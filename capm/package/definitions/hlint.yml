@@ -1,0 +1,12 @@
+image: ubuntu:24.04
+version: 3.5-1build1
+install_command: |
+  apt update
+  apt install -y hlint={version}
+entrypoint: hlint
+args: '{workspace}'
+about: HLint is a tool for suggesting possible improvements to Haskell code.
+website: https://github.com/ndmitchell/hlint
+type: linter
+technology: haskell
+workspace_mode: ro

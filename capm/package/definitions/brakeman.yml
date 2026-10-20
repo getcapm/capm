@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 8.1.0
+install_command: |
+  apk add build-base
+  gem install brakeman -v {version}
+entrypoint: brakeman
+args: '--no-pager {workspace}'
+about: A static analysis security vulnerability scanner for Ruby on Rails applications.
+website: https://brakemanscanner.org
+type: linter
+technology: ruby, rails
+workspace_mode: ro

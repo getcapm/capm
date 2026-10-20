@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.8.0
+install_command: |
+  apk add go
+  go install github.com/yannh/kubeconform/cmd/kubeconform@v{version}
+entrypoint: /root/go/bin/kubeconform
+args: '-summary {workspace}'
+about: A fast Kubernetes manifests validator with support for custom resources.
+website: https://github.com/yannh/kubeconform
+type: linter
+technology: kubernetes
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 1.23.4
+install_command: |
+  apk add build-base
+  gem install rails_best_practices -v {version}
+entrypoint: rails_best_practices
+args: '{workspace}'
+about: A code metric tool that checks the quality of Rails code.
+website: https://rails-bestpractices.com
+type: linter
+technology: ruby, rails
+workspace_mode: ro

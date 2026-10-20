@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.14.1
+install_command: 'pip install blockwatch-cli=={version}'
+entrypoint: blockwatch
+args: ''
+about: A language-agnostic linter that keeps code, documentation, and configuration in sync and enforces formatting and validation rules.
+website: https://github.com/mennanov/blockwatch
+type: linter
+technology: polyglot
+workspace_mode: ro

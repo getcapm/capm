@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.3.2
+install_command: 'pip install autopep8=={version}'
+entrypoint: autopep8
+args: '--diff --recursive {workspace}'
+about: Automatically formats Python code to conform to the PEP 8 style guide.
+website: https://github.com/hhatto/autopep8
+type: formatter
+technology: python
+workspace_mode: ro

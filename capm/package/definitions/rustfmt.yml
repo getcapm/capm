@@ -1,0 +1,12 @@
+image: alpine:3.22.1
+version: 1.87.0-r1
+install_command: |
+  apk add rustfmt={version}
+  apk add cargo
+entrypoint: cargo
+args: 'fmt --check --manifest-path {workspace}/Cargo.toml'
+about: A tool for formatting Rust code according to style guidelines.
+website: https://github.com/rust-lang/rustfmt
+type: formatter
+technology: rust
+workspace_mode: ro

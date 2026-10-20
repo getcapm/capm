@@ -1,0 +1,9 @@
+image: python:3.12-slim-bookworm
+version: 2.3.1
+install_command: 'pip install refurb=={version}'
+entrypoint: refurb
+args: '{workspace}'
+about: A tool for refurbishing and modernizing Python codebases.
+website: https://github.com/dosisod/refurb
+type: linter
+technology: python

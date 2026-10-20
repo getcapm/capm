@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 4.24.6
+install_command: 'pip install deal=={version}'
+entrypoint: python
+args: '-m deal lint {workspace}'
+about: Design by contract for Python, with a linter that statically checks contracts.
+website: https://deal.readthedocs.io/
+type: linter
+technology: python
+workspace_mode: ro

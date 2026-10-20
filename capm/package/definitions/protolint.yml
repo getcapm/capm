@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.58.0
+install_command: |
+  apk add go
+  go install github.com/yoheimuta/protolint/cmd/protolint@v{version}
+entrypoint: /root/go/bin/protolint
+args: 'lint {workspace}'
+about: A pluggable linter and fixer to enforce Protocol Buffer style and conventions.
+website: https://github.com/yoheimuta/protolint
+type: linter
+technology: protobuf
+workspace_mode: ro

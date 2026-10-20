@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.25.0
+install_command: 'pip install thailint=={version}'
+entrypoint: thailint
+args: 'dry {workspace}'
+about: Linter targeting anti-patterns common in AI-generated code, such as duplicated blocks across files.
+website: https://thai-lint.readthedocs.io/
+type: duplication
+technology: polyglot
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.19.1
+install_command: 'pip install prospector=={version}'
+entrypoint: prospector
+args: '{workspace}'
+about: Analyses Python code by aggregating the results of pylint, pycodestyle, mccabe and other tools.
+website: https://github.com/PyCQA/prospector
+type: linter
+technology: python
+workspace_mode: ro

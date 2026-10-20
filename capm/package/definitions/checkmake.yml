@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.3.2
+install_command: |
+  apk add go
+  go install github.com/checkmake/checkmake/cmd/checkmake@v{version}
+entrypoint: /root/go/bin/checkmake
+args: '{workspace}/Makefile'
+about: Linter and analyzer for Makefiles.
+website: https://github.com/checkmake/checkmake
+type: linter
+technology: make
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 17.16.0
+install_command: 'npm install -g stylelint@{version} stylelint-config-standard'
+entrypoint: stylelint
+args: '--config /usr/local/lib/node_modules/stylelint-config-standard/index.js --allow-empty-input **/*.css'
+about: A mighty CSS linter that helps you avoid errors and enforce conventions.
+website: https://stylelint.io
+type: linter
+technology: css
+workspace_mode: ro

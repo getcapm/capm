@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 4.50.1
+install_command: 'pip install skylos=={version}'
+entrypoint: skylos
+args: '{workspace}'
+about: Dead code detection, security scanning, secrets detection and code quality analysis.
+website: https://github.com/duriantaco/skylos
+type: linter
+technology: python, typescript, go
+workspace_mode: ro

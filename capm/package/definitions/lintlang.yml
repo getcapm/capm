@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.8.2
+install_command: 'pip install lintlang=={version}'
+entrypoint: lintlang
+args: 'scan {workspace}'
+about: Static linter for natural-language instructions that control AI agents.
+website: https://lintlang.ai/
+type: linter
+technology: configfile, markdown, skill, yaml
+workspace_mode: ro

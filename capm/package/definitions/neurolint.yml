@@ -1,0 +1,9 @@
+image: node:22-alpine
+version: 1.5.9
+install_command: 'npm install -g @neurolint/cli@{version}'
+entrypoint: neurolint
+args: 'analyze {workspace}'
+about: Deterministic, rule-based AST code analysis and transformation for JavaScript and TypeScript.
+website: https://github.com/Alcatecablee/Neurolint-CLI
+type: linter
+technology: javascript, typescript

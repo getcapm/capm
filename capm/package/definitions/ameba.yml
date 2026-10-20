@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 1.6.4-r0
+install_command: 'apk add ameba={version}'
+entrypoint: ameba
+args: '{workspace}'
+about: A static code analysis tool for Crystal.
+website: https://github.com/crystal-ameba/ameba
+type: linter
+technology: crystal
+workspace_mode: ro

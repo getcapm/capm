@@ -1,0 +1,13 @@
+image: alpine:3.24.2
+version: 0.15.7
+install_command: |
+  apk add cargo
+  apk add clang-dev g++
+  cargo install cargo-spellcheck --locked --version {version}
+entrypoint: /root/.cargo/bin/cargo-spellcheck
+args: 'check --recursive {workspace}'
+about: Checks Rust documentation comments for spelling and grammar mistakes.
+website: https://github.com/drahnr/cargo-spellcheck
+type: linter
+technology: rust
+workspace_mode: ro

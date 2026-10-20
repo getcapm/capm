@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 7.0.2
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require phploc/phploc:{version}
+entrypoint: /opt/composer/vendor/bin/phploc
+args: '{workspace}'
+about: Quickly measures the size and analyzes the structure of a PHP project.
+website: https://github.com/sebastianbergmann/phploc
+type: analyzer
+technology: php
+workspace_mode: ro

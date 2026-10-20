@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 1.3.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require designsecurity/progpilot:{version}
+entrypoint: /opt/composer/vendor/bin/progpilot
+args: '{workspace}'
+about: A static analysis tool for PHP security, detecting vulnerabilities with taint analysis.
+website: https://github.com/designsecurity/progpilot
+type: linter
+technology: php
+workspace_mode: ro

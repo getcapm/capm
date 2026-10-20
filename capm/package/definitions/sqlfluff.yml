@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 4.4.0
+install_command: 'pip install sqlfluff=={version}'
+entrypoint: sqlfluff
+args: 'lint --dialect ansi {workspace}'
+about: A modular SQL linter and auto-formatter with support for multiple dialects and templated code.
+website: https://www.sqlfluff.com
+type: linter
+technology: sql
+workspace_mode: ro

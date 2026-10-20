@@ -1,0 +1,10 @@
+image: ruby:3.4-alpine
+version: 0.8.10
+install_command: 'gem install cfn-nag -v {version}'
+entrypoint: cfn_nag_scan
+args: '--input-path {workspace}'
+about: A linter for AWS CloudFormation templates.
+website: https://github.com/stelligent/cfn_nag
+type: linter
+technology: cloudformation
+workspace_mode: ro

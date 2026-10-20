@@ -1,0 +1,9 @@
+image: python:3.12-slim-bookworm
+version: 0.9.2
+install_command: 'pip install fortitude-lint=={version}'
+entrypoint: fortitude
+args: 'check {workspace}'
+about: Fortran linter, inspired by (and built on) Ruff, and based on community best practices.
+website: https://github.com/PlasmaFAIR/fortitude
+type: linter
+technology: fortran

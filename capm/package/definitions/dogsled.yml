@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.0.0-20240329141207-62bc1f6ce2d0
+install_command: |
+  apk add go
+  go install github.com/alexkohler/dogsled/cmd/dogsled@v{version}
+entrypoint: /root/go/bin/dogsled
+args: '{workspace}/...'
+about: Finds assignments and declarations with too many blank identifiers.
+website: https://github.com/alexkohler/dogsled
+type: linter
+technology: go
+workspace_mode: ro

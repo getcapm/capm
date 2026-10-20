@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 0.11.0
+install_command: |
+  apk add build-base
+  gem install fasterer -v {version}
+entrypoint: fasterer
+args: '{workspace}'
+about: Common Ruby idioms checker that suggests faster alternatives.
+website: https://github.com/DamirSvrtan/fasterer
+type: linter
+technology: ruby
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 1.24.13-r0
+install_command: 'apk add go={version}'
+entrypoint: go
+args: 'vet {workspace}/...'
+about: Examines Go source code and reports suspicious constructs.
+website: https://pkg.go.dev/cmd/vet
+type: linter
+technology: go
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.30.0
+install_command: |
+  apk add go
+  go install github.com/kisielk/errcheck@v{version}
+entrypoint: /root/go/bin/errcheck
+args: '{workspace}/...'
+about: Checks that error return values in Go code are used.
+website: https://github.com/kisielk/errcheck
+type: linter
+technology: go
+workspace_mode: ro

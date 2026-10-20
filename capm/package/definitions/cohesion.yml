@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.2.0
+install_command: 'pip install cohesion=={version}'
+entrypoint: cohesion
+args: '-d {workspace}'
+about: A tool for measuring Python class cohesion.
+website: https://github.com/mschwager/cohesion
+type: analyzer
+technology: python
+workspace_mode: ro

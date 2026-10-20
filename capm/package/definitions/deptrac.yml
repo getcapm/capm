@@ -1,0 +1,14 @@
+image: php:8.4-cli-alpine
+version: 4.7.2
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require deptrac/deptrac:{version}
+entrypoint: /opt/composer/vendor/bin/deptrac
+args: 'analyse --no-progress'
+about: Enforces rules for dependencies between software layers in PHP code.
+website: https://github.com/deptrac/deptrac
+type: linter
+technology: php

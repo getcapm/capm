@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.0.1
+install_command: |
+  apk add go
+  go install github.com/walle/lll/cmd/lll@v{version}
+entrypoint: /root/go/bin/lll
+args: '{workspace}'
+about: Reports long lines in Go code.
+website: https://github.com/walle/lll
+type: linter
+technology: go
+workspace_mode: ro

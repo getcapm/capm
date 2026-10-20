@@ -1,0 +1,9 @@
+image: python:3.12-slim-bookworm
+version: 2.10.1
+install_command: 'pip install pip-audit=={version}'
+entrypoint: pip-audit
+args: '{workspace}'
+about: Scans Python projects and environments for packages with known vulnerabilities.
+website: https://github.com/pypa/pip-audit
+type: linter
+technology: python

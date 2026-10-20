@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 2.15.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+  composer global require nunomaduro/phpinsights:{version}
+entrypoint: /opt/composer/vendor/bin/phpinsights
+args: 'analyse {workspace} --no-interaction'
+about: Instant PHP quality checks for code quality, coding style, architecture and complexity.
+website: https://phpinsights.com
+type: linter
+technology: php

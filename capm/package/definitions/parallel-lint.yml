@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 1.4.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require php-parallel-lint/php-parallel-lint:{version}
+entrypoint: /opt/composer/vendor/bin/parallel-lint
+args: '{workspace}'
+about: Checks the syntax of PHP files in parallel.
+website: https://github.com/php-parallel-lint/PHP-Parallel-Lint
+type: linter
+technology: php
+workspace_mode: ro

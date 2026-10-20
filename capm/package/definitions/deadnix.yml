@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.3.1
+install_command: |
+  apk add cargo
+  cargo install deadnix --version {version}
+entrypoint: /root/.cargo/bin/deadnix
+args: '{workspace}'
+about: Scan Nix files for dead code (unused variable bindings).
+website: https://github.com/astro/deadnix
+type: linter
+technology: nix
+workspace_mode: ro

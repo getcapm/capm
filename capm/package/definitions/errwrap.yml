@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.7.0
+install_command: |
+  apk add go
+  go install github.com/fatih/errwrap@v{version}
+entrypoint: /root/go/bin/errwrap
+args: '{workspace}/...'
+about: Reports fmt.Errorf() calls that should use the %w verb to wrap errors.
+website: https://github.com/fatih/errwrap
+type: linter
+technology: go
+workspace_mode: ro

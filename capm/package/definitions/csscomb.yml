@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 4.3.0
+install_command: 'npm install -g csscomb@{version}'
+entrypoint: csscomb
+args: '--lint {workspace}'
+about: A coding style formatter for CSS.
+website: https://github.com/csscomb/csscomb.js
+type: formatter
+technology: css
+workspace_mode: ro

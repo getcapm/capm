@@ -1,0 +1,11 @@
+image: alpine:3.24.2
+version: 0.20.2
+install_command: |
+  apk add cargo
+  cargo install cargo-deny --version {version}
+entrypoint: /root/.cargo/bin/cargo-deny
+args: '--manifest-path {workspace}/Cargo.toml check'
+about: A cargo plugin for linting your dependencies for licenses, duplicate crates, security vulnerabilities and more.
+website: https://embarkstudios.github.io/cargo-deny
+type: linter
+technology: rust

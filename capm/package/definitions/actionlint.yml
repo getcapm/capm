@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.7.12
+install_command: |
+  apk add go
+  go install github.com/rhysd/actionlint/cmd/actionlint@v{version}
+entrypoint: /root/go/bin/actionlint
+args: ''
+about: Static checker for GitHub Actions workflow files.
+website: https://github.com/rhysd/actionlint
+type: linter
+technology: yaml
+workspace_mode: ro

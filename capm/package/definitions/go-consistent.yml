@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.6.2
+install_command: |
+  apk add go
+  go install github.com/quasilyte/go-consistent@v{version}
+entrypoint: /root/go/bin/go-consistent
+args: './...'
+about: Analyzer that helps you make your Go programs more consistent.
+website: https://github.com/quasilyte/go-consistent
+type: linter
+technology: go
+workspace_mode: ro

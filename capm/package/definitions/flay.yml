@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 2.14.4
+install_command: |
+  apk add build-base
+  gem install flay -v {version}
+entrypoint: flay
+args: '{workspace}'
+about: Analyzes Ruby code for structural similarities.
+website: https://ruby.sadi.st/Flay.html
+type: duplication
+technology: ruby
+workspace_mode: ro

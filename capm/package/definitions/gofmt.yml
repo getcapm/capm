@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 1.24.13-r0
+install_command: 'apk add go={version}'
+entrypoint: gofmt
+args: '-s -l {workspace}'
+about: Checks if Go code is properly formatted and could not be further simplified.
+website: https://pkg.go.dev/cmd/gofmt
+type: formatter
+technology: go
+workspace_mode: ro

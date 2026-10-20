@@ -1,0 +1,10 @@
+image: ruby:3.4-alpine
+version: 5.1.0
+install_command: 'gem install metadata-json-lint -v {version}'
+entrypoint: metadata-json-lint
+args: '{workspace}/metadata.json'
+about: Validates and lints metadata.json files in Puppet modules against Puppet Forge style guidelines.
+website: https://github.com/voxpupuli/metadata-json-lint
+type: linter
+technology: puppet
+workspace_mode: ro

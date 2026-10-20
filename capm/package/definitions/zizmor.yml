@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.31.1
+install_command: 'pip install zizmor=={version}'
+entrypoint: zizmor
+args: '{workspace}'
+about: A static analysis tool for GitHub Actions that finds security issues in workflows.
+website: https://docs.zizmor.sh
+type: linter
+technology: yaml
+workspace_mode: ro

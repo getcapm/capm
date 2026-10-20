@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.4.6
+install_command: 'pip install mbake=={version}'
+entrypoint: mbake
+args: 'format --check {workspace}/Makefile'
+about: A Makefile formatter and linter.
+website: https://github.com/EbodShojaei/bake
+type: formatter
+technology: make
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.9.0
+install_command: |
+  apk add go
+  go install golang.org/x/vuln/cmd/govulncheck@v{version}
+entrypoint: /root/go/bin/govulncheck
+args: '{workspace}/...'
+about: Reports known vulnerabilities that affect Go code.
+website: https://go.dev/doc/security/vuln
+type: analyzer
+technology: go
+workspace_mode: ro

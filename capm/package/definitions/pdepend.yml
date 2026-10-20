@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 3.0.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require pdepend/pdepend:{version}
+entrypoint: /opt/composer/vendor/bin/pdepend
+args: '--summary-xml=/dev/stdout {workspace}'
+about: Calculates software metrics like cyclomatic complexity for PHP code.
+website: https://pdepend.org
+type: complexity
+technology: php
+workspace_mode: ro

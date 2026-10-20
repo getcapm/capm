@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.1.1
+install_command: 'pip install bashate=={version}'
+entrypoint: /bin/sh
+args: '-c "find {workspace} -name ''*.sh'' -print0 | xargs -0 -r bashate"'
+about: Code style enforcement for bash programs, in the style of pycodestyle.
+website: https://docs.openstack.org/bashate/latest/
+type: linter
+technology: shell
+workspace_mode: ro

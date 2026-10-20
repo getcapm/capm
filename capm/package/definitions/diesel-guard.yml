@@ -1,0 +1,13 @@
+image: alpine:3.24.2
+version: 0.12.0
+install_command: |
+  apk add cargo
+  apk add clang-dev protoc
+  cargo install diesel-guard --version {version}
+entrypoint: /root/.cargo/bin/diesel-guard
+args: 'check {workspace}'
+about: Linter for dangerous Postgres migration patterns in Diesel and SQLx.
+website: https://ayarotsky.github.io/diesel-guard/
+type: linter
+technology: sql, rust
+workspace_mode: ro

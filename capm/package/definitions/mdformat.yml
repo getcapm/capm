@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.0.0
+install_command: 'pip install mdformat=={version}'
+entrypoint: mdformat
+args: '--check {workspace}'
+about: CommonMark compliant Markdown formatter.
+website: https://mdformat.rtfd.io
+type: formatter
+technology: markdown
+workspace_mode: ro

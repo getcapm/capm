@@ -1,0 +1,10 @@
+image: ruby:3.4-alpine
+version: 5.1.1
+install_command: 'gem install puppet-lint -v {version}'
+entrypoint: puppet-lint
+args: '{workspace}'
+about: Checks Puppet manifests against the Puppet language style guide.
+website: https://github.com/puppetlabs/puppet-lint
+type: linter
+technology: puppet
+workspace_mode: ro

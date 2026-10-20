@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 1.1.414
+install_command: 'npm install -g pyright@{version}'
+entrypoint: pyright
+args: '{workspace}'
+about: Static type checker for Python.
+website: https://github.com/Microsoft/pyright
+type: linter
+technology: python
+workspace_mode: ro

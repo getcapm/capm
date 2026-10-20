@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 0.10.0-r2
+install_command: 'apk add shellcheck={version}'
+entrypoint: /bin/sh
+args: '-c "find {workspace} -name ''*.sh'' -print0 | xargs -0 -r shellcheck"'
+about: A static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
+website: https://www.shellcheck.net
+type: linter
+technology: shell
+workspace_mode: ro

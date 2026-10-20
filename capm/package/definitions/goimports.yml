@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.52.0
+install_command: |
+  apk add go
+  go install golang.org/x/tools/cmd/goimports@v{version}
+entrypoint: /root/go/bin/goimports
+args: '-l {workspace}'
+about: Checks for missing or unreferenced Go package imports.
+website: https://pkg.go.dev/golang.org/x/tools/cmd/goimports
+type: linter
+technology: go
+workspace_mode: ro

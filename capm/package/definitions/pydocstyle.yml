@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 6.3.0
+install_command: 'pip install pydocstyle=={version}'
+entrypoint: pydocstyle
+args: '{workspace}'
+about: Check compliance with Python docstring conventions.
+website: http://www.pydocstyle.org
+type: linter
+technology: python
+workspace_mode: ro

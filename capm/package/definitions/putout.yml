@@ -1,0 +1,9 @@
+image: node:22-alpine
+version: 42.21.0
+install_command: 'npm install -g putout@{version}'
+entrypoint: putout
+args: '{workspace}'
+about: Pluggable and configurable code transformer with built-in ESLint and Babel plugin support.
+website: https://github.com/coderaiser/putout
+type: linter
+technology: javascript, typescript, jsx, css, json, markdown, yaml

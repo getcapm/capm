@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 17.1.2
+install_command: 'npm install -g standard@{version}'
+entrypoint: standard
+args: ''
+about: Checks JavaScript code against the JavaScript Standard Style.
+website: https://standardjs.com
+type: linter
+technology: javascript, nodejs
+workspace_mode: ro

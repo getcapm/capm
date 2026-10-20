@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 4.0.0
+install_command: |
+  apk add cargo
+  cargo install dotenv-linter --version {version}
+entrypoint: /root/.cargo/bin/dotenv-linter
+args: 'check {workspace}'
+about: Lightning-fast linter for .env files, written in Rust.
+website: https://dotenv-linter.github.io
+type: linter
+technology: dotenv
+workspace_mode: ro

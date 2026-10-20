@@ -1,0 +1,10 @@
+image: ruby:3.4-alpine
+version: 0.18.2
+install_command: 'gem install rufo -v {version}'
+entrypoint: rufo
+args: '--check {workspace}'
+about: An opinionated Ruby formatter.
+website: https://github.com/ruby-formatter/rufo
+type: formatter
+technology: ruby
+workspace_mode: ro

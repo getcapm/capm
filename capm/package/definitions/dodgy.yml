@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.2.1
+install_command: 'pip install dodgy=={version}'
+entrypoint: dodgy
+args: ''
+about: Searches the codebase for dodgy looking values such as hard-coded passwords, secret keys and SCM diff check-ins.
+website: https://github.com/landscapeio/dodgy
+type: linter
+technology: python
+workspace_mode: ro

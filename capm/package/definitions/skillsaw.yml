@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.22.0
+install_command: 'pip install skillsaw=={version}'
+entrypoint: skillsaw
+args: 'lint {workspace}'
+about: Configurable linter for the files that steer AI coding agents, such as skills and plugins.
+website: https://skillsaw.org/
+type: linter
+technology: configfile, json, markdown, skill, yaml
+workspace_mode: ro

@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 3.95.27
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require friendsofphp/php-cs-fixer:{version}
+entrypoint: /opt/composer/vendor/bin/php-cs-fixer
+args: 'fix --dry-run --diff --using-cache=no {workspace}'
+about: Fixes PHP code according to coding standards like PSR-1, PSR-2 and the Symfony standard.
+website: https://cs.symfony.com
+type: formatter
+technology: php
+workspace_mode: ro

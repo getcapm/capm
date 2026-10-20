@@ -16,7 +16,7 @@ def info_command(package_repository: dict[str, PackageDefinition], fmt: InfoForm
         if package not in package_repository:
             fail(f"Package '{package}' does not exist.")
             sys.exit(1)
-        yml_file = Path(__file__).parent / 'package' / 'definitions' / f'{package}.yml'
+        yml_file = Path(__file__).parent.parent / 'package' / 'definitions' / f'{package}.yml'
         with open(yml_file, 'r') as file:
             content = file.read().strip()
         print(content)

@@ -1,0 +1,9 @@
+image: node:22-alpine
+version: 3.34.1
+install_command: 'npm install -g fallow@{version}'
+entrypoint: fallow
+args: ''
+about: Rust-native static analysis for JavaScript and TypeScript that finds dead code, duplication and complexity hotspots.
+website: https://fallow.tools
+type: analyzer
+technology: javascript, typescript, jsx, css, nodejs

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.5.0
+install_command: |
+  apk add cargo
+  cargo install sleek --version {version}
+entrypoint: /root/.cargo/bin/sleek
+args: '--check {workspace}/**/*.sql'
+about: A CLI tool for formatting SQL.
+website: https://github.com/nrempel/sleek
+type: formatter
+technology: sql
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 0.6.0
+install_command: 'npm install -g cqc@{version}'
+entrypoint: cqc
+args: '{workspace}'
+about: Checks code quality for js, jsx, vue, css, less, scss, sass and styl files.
+website: https://github.com/xcatliu/cqc
+type: analyzer
+technology: css, javascript, jsx, less, vue
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.11.0
+install_command: |
+  apk add go
+  go install github.com/jgautheron/goconst/cmd/goconst@v{version}
+entrypoint: /root/go/bin/goconst
+args: '{workspace}/...'
+about: Finds repeated strings in Go code that could be replaced by a constant.
+website: https://github.com/jgautheron/goconst
+type: linter
+technology: go
+workspace_mode: ro

@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 13.3.7
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require symplify/easy-coding-standard:{version}
+entrypoint: /opt/composer/vendor/bin/ecs
+args: 'check {workspace}'
+about: Combines PHP_CodeSniffer and PHP-CS-Fixer to check PHP coding standards.
+website: https://github.com/easy-coding-standard/easy-coding-standard
+type: linter
+technology: php
+workspace_mode: ro

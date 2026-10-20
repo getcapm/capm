@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 4.0.3
+install_command: 'pip install pyflakes=={version}'
+entrypoint: pyflakes
+args: '{workspace}'
+about: Check Python source files for errors.
+website: https://github.com/PyCQA/pyflakes
+type: linter
+technology: python
+workspace_mode: ro

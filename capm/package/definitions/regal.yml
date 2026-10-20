@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.43.0
+install_command: |
+  apk add go
+  go install github.com/open-policy-agent/regal@v{version}
+entrypoint: /root/go/bin/regal
+args: 'lint {workspace}'
+about: A linter and language server for Rego, the policy language of Open Policy Agent.
+website: https://github.com/open-policy-agent/regal
+type: linter
+technology: rego
+workspace_mode: ro

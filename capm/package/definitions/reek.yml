@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 6.6.0
+install_command: |
+  apk add build-base
+  gem install reek -v {version}
+entrypoint: reek
+args: '{workspace}'
+about: Code smell detector for Ruby.
+website: https://github.com/troessner/reek
+type: linter
+technology: ruby
+workspace_mode: ro

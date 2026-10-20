@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 10.13.0
+install_command: 'npm install -g eslint@{version}'
+entrypoint: eslint
+args: '{workspace}'
+about: An extensible, AST-based linter for JavaScript.
+website: https://eslint.org
+type: linter
+technology: javascript, typescript, jsx
+workspace_mode: ro

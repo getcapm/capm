@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.17.1
+install_command: |
+  apk add go
+  go install github.com/mgechev/revive@v{version}
+entrypoint: /root/go/bin/revive
+args: '{workspace}/...'
+about: Fast, configurable, extensible and flexible linter for Go; drop-in replacement of golint.
+website: https://revive.run
+type: linter
+technology: go
+workspace_mode: ro

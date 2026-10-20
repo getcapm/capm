@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 2.5.15
+install_command: 'npm install -g @biomejs/biome@{version}'
+entrypoint: biome
+args: 'check {workspace}'
+about: A fast formatter and linter toolchain for JavaScript, TypeScript, JSON and CSS.
+website: https://biomejs.dev
+type: linter
+technology: javascript, typescript, json, css
+workspace_mode: ro

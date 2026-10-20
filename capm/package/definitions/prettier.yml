@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 3.9.10
+install_command: 'npm install -g prettier@{version}'
+entrypoint: prettier
+args: '--check {workspace}'
+about: An opinionated code formatter.
+website: https://prettier.io
+type: formatter
+technology: html, javascript, typescript
+workspace_mode: ro

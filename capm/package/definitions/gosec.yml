@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 2.29.0
+install_command: |
+  apk add go
+  go install github.com/securego/gosec/v2/cmd/gosec@v{version}
+entrypoint: /root/go/bin/gosec
+args: '{workspace}/...'
+about: Inspects Go source code for security problems by scanning the Go AST.
+website: https://securego.io
+type: linter
+technology: go
+workspace_mode: ro

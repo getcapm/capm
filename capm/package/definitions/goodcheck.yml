@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 3.1.0
+install_command: |
+  apk add build-base
+  gem install goodcheck -v {version}
+entrypoint: goodcheck
+args: check
+about: Regexp based customizable linter.
+website: https://sider.github.io/goodcheck
+type: linter
+technology: polyglot
+workspace_mode: ro

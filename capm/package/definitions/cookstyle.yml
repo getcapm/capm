@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 9.0.0
+install_command: |
+  apk add build-base
+  gem install cookstyle -v {version}
+entrypoint: cookstyle
+args: '{workspace}'
+about: A linting tool based on RuboCop for Chef cookbooks.
+website: https://github.com/chef/cookstyle
+type: linter
+technology: chef, ruby
+workspace_mode: ro

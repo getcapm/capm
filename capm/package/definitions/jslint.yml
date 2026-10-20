@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: '2026.9.29'
+install_command: 'npm install -g @jslint-org/jslint@{version}'
+entrypoint: jslint
+args: '{workspace}'
+about: The JavaScript code quality tool.
+website: https://www.jslint.com
+type: linter
+technology: javascript
+workspace_mode: ro

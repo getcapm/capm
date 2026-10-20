@@ -1,0 +1,9 @@
+image: python:3.12-slim-bookworm
+version: 2024.10.11
+install_command: 'pip install pytype=={version}'
+entrypoint: pytype
+args: '{workspace}'
+about: A static type analyzer for Python code.
+website: https://google.github.io/pytype
+type: linter
+technology: python

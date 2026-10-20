@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.52.0
+install_command: |
+  apk add go
+  go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@v{version}
+entrypoint: /root/go/bin/shadow
+args: '{workspace}/...'
+about: Reports Go variables that may have been unintentionally shadowed.
+website: https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/shadow
+type: linter
+technology: go
+workspace_mode: ro

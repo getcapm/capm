@@ -1,0 +1,12 @@
+image: ubuntu:24.04
+version: 8.36.1-1
+install_command: |
+  apt update
+  apt install -y checkstyle={version}
+entrypoint: checkstyle
+args: '-c /usr/share/checkstyle/google_checks.xml {workspace}'
+about: Checks Java source code for adherence to a coding standard or set of validation rules.
+website: https://checkstyle.org
+type: linter
+technology: java
+workspace_mode: ro

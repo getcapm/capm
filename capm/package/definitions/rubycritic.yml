@@ -1,0 +1,11 @@
+image: ruby:3.4-alpine
+version: 5.0.0
+install_command: |
+  apk add build-base
+  gem install rubycritic -v {version}
+entrypoint: rubycritic
+args: '--no-browser --format console {workspace}'
+about: A Ruby code quality reporter.
+website: https://github.com/whitesmith/rubycritic
+type: analyzer
+technology: ruby

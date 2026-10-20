@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 0.0.10
+install_command: 'npm install -g parker@{version}'
+entrypoint: parker
+args: '{workspace}'
+about: Stylesheet analysis tool for CSS.
+website: https://github.com/katiefenn/parker
+type: analyzer
+technology: css
+workspace_mode: ro

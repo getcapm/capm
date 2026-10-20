@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 3.1.0
+install_command: 'npm install -g fta-cli@{version}'
+entrypoint: fta
+args: '{workspace}'
+about: Rust-based static analysis for TypeScript projects that scores file complexity and maintainability.
+website: https://ftaproject.dev/
+type: complexity
+technology: typescript
+workspace_mode: ro

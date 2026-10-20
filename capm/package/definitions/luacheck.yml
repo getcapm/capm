@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 0.26.1-r0
+install_command: 'apk add luacheck={version}'
+entrypoint: luacheck
+args: '{workspace}'
+about: A tool for linting and static analysis of Lua code.
+website: https://github.com/lunarmodules/luacheck
+type: linter
+technology: lua
+workspace_mode: ro

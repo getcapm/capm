@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.64.0
+install_command: |
+  apk add go
+  go install github.com/terraform-linters/tflint@v{version}
+entrypoint: /root/go/bin/tflint
+args: '--chdir={workspace} --recursive'
+about: A pluggable Terraform linter.
+website: https://github.com/terraform-linters/tflint
+type: linter
+technology: terraform
+workspace_mode: ro

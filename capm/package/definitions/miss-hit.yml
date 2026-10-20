@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.9.44
+install_command: 'pip install miss_hit=={version}'
+entrypoint: mh_style
+args: '{workspace}'
+about: Static analysis tools (style checker, metrics and linter) for MATLAB and Octave code.
+website: https://misshit.org
+type: linter
+technology: matlab
+workspace_mode: ro

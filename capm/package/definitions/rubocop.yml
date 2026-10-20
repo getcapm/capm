@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 1.92.0
+install_command: |
+  apk add build-base
+  gem install rubocop -v {version}
+entrypoint: rubocop
+args: '{workspace}'
+about: A Ruby static code analyzer and formatter, based on the community Ruby style guide.
+website: https://docs.rubocop.org/rubocop
+type: linter
+technology: ruby
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 1.1.0
+install_command: |
+  apk add go
+  go install github.com/mibk/dupl@v{version}
+entrypoint: /root/go/bin/dupl
+args: '{workspace}'
+about: Reports potentially duplicated Go code.
+website: https://github.com/mibk/dupl
+type: duplication
+technology: go
+workspace_mode: ro

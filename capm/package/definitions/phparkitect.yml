@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 1.3.1
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require phparkitect/phparkitect:{version}
+entrypoint: /opt/composer/vendor/bin/phparkitect
+args: check
+about: Adds architectural constraint checks to your PHP codebase, expressed in simple PHP code.
+website: https://github.com/phparkitect/arkitect
+type: linter
+technology: php
+workspace_mode: ro

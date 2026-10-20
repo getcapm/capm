@@ -1,0 +1,10 @@
+image: ruby:3.4-alpine
+version: 0.18.1
+install_command: 'gem install mdl -v {version}'
+entrypoint: mdl
+args: '{workspace}'
+about: A tool to check Markdown files and flag style issues.
+website: https://github.com/markdownlint/markdownlint
+type: linter
+technology: markdown
+workspace_mode: ro

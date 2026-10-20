@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 7.9.4
+install_command: 'npm install -g ember-template-lint@{version}'
+entrypoint: ember-template-lint
+args: '.'
+about: Linter for Ember or Handlebars templates.
+website: https://github.com/ember-template-lint/ember-template-lint
+type: linter
+technology: ember, handlebars
+workspace_mode: ro

@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.32.5
+install_command: 'pip install pyscn=={version}'
+entrypoint: pyscn
+args: 'check {workspace}'
+about: Python code quality analyzer with complexity analysis, dead code detection, clone detection and coupling metrics.
+website: https://ludo-technologies.github.io/pyscn/
+type: analyzer
+technology: python
+workspace_mode: ro

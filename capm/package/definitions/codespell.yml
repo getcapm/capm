@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.4.3
+install_command: 'pip install codespell=={version}'
+entrypoint: codespell
+args: '{workspace}'
+about: Check code for common misspellings.
+website: https://github.com/codespell-project/codespell
+type: linter
+technology: writing
+workspace_mode: ro

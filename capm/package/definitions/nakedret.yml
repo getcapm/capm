@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 2.0.6
+install_command: |
+  apk add go
+  go install github.com/alexkohler/nakedret/v2/cmd/nakedret@v{version}
+entrypoint: /root/go/bin/nakedret
+args: '{workspace}/...'
+about: Finds naked returns in Go functions longer than a given length.
+website: https://github.com/alexkohler/nakedret
+type: linter
+technology: go
+workspace_mode: ro

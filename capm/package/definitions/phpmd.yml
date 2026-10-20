@@ -1,0 +1,14 @@
+image: php:8.4-cli-alpine
+version: 3.0.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require phpmd/phpmd:{version}
+entrypoint: /opt/composer/vendor/bin/phpmd
+args: 'analyze --ruleset cleancode --ruleset codesize --ruleset controversial --ruleset design --ruleset naming --ruleset unusedcode {workspace}'
+about: Finds possible bugs, suboptimal code and overcomplicated expressions in PHP code.
+website: https://phpmd.org
+type: linter
+technology: php

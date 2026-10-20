@@ -1,0 +1,15 @@
+image: php:8.4-cli-alpine
+version: 2.11.0
+install_command: |
+  export COMPOSER_HOME=/opt/composer COMPOSER_ALLOW_SUPERUSER=1
+  apk add git unzip
+  wget -qO /usr/local/bin/composer https://getcomposer.org/download/latest-2.x/composer.phar
+  chmod +x /usr/local/bin/composer
+  composer global require phpmetrics/phpmetrics:{version}
+entrypoint: /opt/composer/vendor/bin/phpmetrics
+args: '{workspace}'
+about: Calculates various code quality metrics for PHP code.
+website: https://www.phpmetrics.org
+type: analyzer
+technology: php
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 1.57.0
+install_command: |
+  apk add build-base
+  gem install standard -v {version}
+entrypoint: standardrb
+args: '{workspace}'
+about: Ruby style guide, linter and automatic code fixer.
+website: https://github.com/standardrb/standard
+type: linter
+technology: ruby
+workspace_mode: ro

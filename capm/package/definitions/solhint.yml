@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 6.2.5
+install_command: 'npm install -g solhint@{version}'
+entrypoint: solhint
+args: '{workspace}/**/*.sol'
+about: A linter for Solidity code that provides security and style guide validations.
+website: https://protofire.github.io/solhint/
+type: linter
+technology: solidity
+workspace_mode: ro

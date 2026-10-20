@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 2.1.1
+install_command: 'pip install codepathfinder=={version}'
+entrypoint: pathfinder
+args: 'scan --ruleset python/all --project {workspace}'
+about: Open-source static code analysis for security teams with inter-file dataflow taint analysis.
+website: https://codepathfinder.dev
+type: linter
+technology: python, go, dockerfile
+workspace_mode: ro

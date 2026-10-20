@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 2.14.0
+install_command: 'npm install -g autocorrect-node@{version}'
+entrypoint: autocorrect
+args: '--lint'
+about: A linter and formatter that improves copywriting by correcting spaces, words and punctuation between CJK and Latin text.
+website: https://huacnlee.github.io/autocorrect
+type: linter
+technology: polyglot
+workspace_mode: ro

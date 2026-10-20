@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 4.3.2
+install_command: |
+  apk add cargo
+  cargo install shellharden --version {version}
+entrypoint: /bin/sh
+args: '-c "find {workspace} -name ''*.sh'' -print0 | xargs -0 -r /root/.cargo/bin/shellharden --check"'
+about: Semi-automates the rewriting of shell scripts to ShellCheck conformance, focused on quoting.
+website: https://github.com/anordal/shellharden
+type: linter
+technology: shell
+workspace_mode: ro

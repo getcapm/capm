@@ -1,0 +1,12 @@
+image: ruby:3.4-alpine
+version: 2.3.2
+install_command: |
+  apk add build-base
+  gem install fukuzatsu -v {version}
+entrypoint: fuku
+args: 'check {workspace}'
+about: Measures the cyclomatic complexity of Ruby class files.
+website: https://github.com/CoralineAda/fukuzatsu
+type: complexity
+technology: ruby
+workspace_mode: ro

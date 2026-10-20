@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 5.2.12
+install_command: 'npm install -g @coffeelint/cli@{version}'
+entrypoint: coffeelint
+args: '{workspace}'
+about: A style checker that helps keep CoffeeScript code clean and consistent.
+website: https://coffeelint.github.io/
+type: linter
+technology: coffeescript
+workspace_mode: ro

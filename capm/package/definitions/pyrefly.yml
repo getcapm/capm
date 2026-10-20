@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 1.4.0
+install_command: 'pip install pyrefly=={version}'
+entrypoint: pyrefly
+args: 'check {workspace}'
+about: A fast, incremental type checker for Python.
+website: https://pyrefly.org/
+type: linter
+technology: python
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.12.0
+install_command: |
+  apk add go
+  go install mvdan.cc/gofumpt@v{version}
+entrypoint: /root/go/bin/gofumpt
+args: '-l {workspace}'
+about: Enforces a stricter format than gofmt, while being backwards-compatible.
+website: https://github.com/mvdan/gofumpt
+type: formatter
+technology: go
+workspace_mode: ro

@@ -1,0 +1,12 @@
+image: ubuntu:24.04
+version: 3.1.1-1
+install_command: |
+  apt update
+  apt install -y r-cran-lintr={version}
+entrypoint: Rscript
+args: '-e ''lintr::lint_dir("{workspace}")'''
+about: Static code analysis for R.
+website: https://lintr.r-lib.org
+type: linter
+technology: r
+workspace_mode: ro

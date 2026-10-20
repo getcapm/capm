@@ -1,0 +1,9 @@
+image: node:22-alpine
+version: 0.9.10
+install_command: 'npm install -g nestjs-doctor@{version}'
+entrypoint: nestjs-doctor
+args: '{workspace}'
+about: Static analysis tool for NestJS applications that detects security, performance and architecture anti-patterns.
+website: https://github.com/RoloBits/nestjs-doctor
+type: linter
+technology: typescript, javascript

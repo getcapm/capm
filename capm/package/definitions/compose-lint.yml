@@ -1,0 +1,10 @@
+image: python:3.12-slim-bookworm
+version: 0.36.1
+install_command: 'pip install compose-lint=={version}'
+entrypoint: compose-lint
+args: ''
+about: Security linter for Docker Compose files.
+website: https://github.com/tmatens/compose-lint
+type: linter
+technology: docker-compose, yaml
+workspace_mode: ro

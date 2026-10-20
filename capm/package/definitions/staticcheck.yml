@@ -1,0 +1,12 @@
+image: alpine:3.24.2
+version: 0.8.2
+install_command: |
+  apk add go
+  go install honnef.co/go/tools/cmd/staticcheck@v{version}
+entrypoint: /root/go/bin/staticcheck
+args: '{workspace}/...'
+about: Go static analysis that finds bugs, simplifies code and improves performance.
+website: https://staticcheck.dev
+type: linter
+technology: go
+workspace_mode: ro

@@ -1,0 +1,9 @@
+image: node:22-alpine
+version: 5.0.1
+install_command: 'npm install -g xo@{version}'
+entrypoint: xo
+args: ''
+about: Opinionated but configurable ESLint wrapper with lots of goodies included.
+website: https://github.com/xojs/xo
+type: linter
+technology: javascript

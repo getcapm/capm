@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 1.0.5
+install_command: 'npm install -g csslint@{version}'
+entrypoint: csslint
+args: '{workspace}'
+about: Does basic syntax checking and finds problematic patterns or signs of inefficiency in CSS.
+website: http://csslint.net
+type: linter
+technology: css
+workspace_mode: ro

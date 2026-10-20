@@ -1,0 +1,10 @@
+image: node:22-alpine
+version: 11.0.1
+install_command: 'npm install -g alex@{version}'
+entrypoint: alex
+args: '{workspace}'
+about: Catch insensitive, inconsiderate writing.
+website: https://alexjs.com
+type: linter
+technology: writing
+workspace_mode: ro

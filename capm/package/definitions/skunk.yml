@@ -1,0 +1,11 @@
+image: ruby:3.4-alpine
+version: 0.6.0
+install_command: |
+  apk add build-base
+  gem install skunk -v {version}
+entrypoint: skunk
+args: '{workspace}'
+about: A SkunkScore calculator that finds the most complicated Ruby code without test coverage.
+website: https://github.com/fastruby/skunk
+type: complexity
+technology: ruby, rails
