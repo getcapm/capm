@@ -1,0 +1,10 @@
+image: alpine:3.24.2
+version: 4.1.0
+install_command: |
+  apk add go
+  go install github.com/boyter/scc/v4@v{version}
+entrypoint: /root/go/bin/scc
+args: '{workspace}'
+repository: https://github.com/boyter/scc
+about: SCC is a very fast and accurate code counter that supports over 100 languages.
+type: analyzer

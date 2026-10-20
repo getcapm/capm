@@ -1,0 +1,10 @@
+image: alpine:3.22.1
+version: 2.04-r0
+install_command: |
+  apk add cloc={version}
+  apk add git
+entrypoint: cloc
+args: '{workspace}'
+repository: https://github.com/aldanial/cloc
+about: Counts blank lines, comment lines, and physical lines of source code in many programming languages.
+type: analyzer

@@ -1,0 +1,11 @@
+image: alpine:3.24.2
+version: 3.2.0
+install_command: |
+  apk add cargo
+  apk add git
+  cargo install mezura --version {version}
+entrypoint: /root/.cargo/bin/mezura
+args: '{workspace}'
+repository: https://github.com/subamanis/mezura
+about: Counts the lines of a codebase quickly and accurately.
+type: analyzer
